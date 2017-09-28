@@ -1,0 +1,12 @@
+{
+  "name": "naoty.github.io",
+  "description": "My page",
+  "version": "1.0.0",
+  "author": {
+    "name": "Naoto Kaneko",
+    "email": "naoty.k@gmail.com",
+    "url": "https://naoty.github.io"
+  },
+  "license": "MIT",
+  "private": true
+}
