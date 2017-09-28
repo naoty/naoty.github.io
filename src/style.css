@@ -1,4 +1,5 @@
 html {
+  box-sizing: border-box;
   font-family: Verdana, Arial, sans-serif;
   font-size: 16px;
   line-height: 1.5;
@@ -9,23 +10,35 @@ body {
 }
 
 #container {
-  width: 40em;
-  margin: 2em auto;
-  padding: 2em;
+  width: 40rem;
+  margin: 2rem auto;
+  padding: 0 2rem;
   border: 1px solid #000000;
   background-color: #FFFFFF;
 }
 
-#container *:first-child {
-  margin-top: 0
+main {
+  margin-bottom: 2rem;
 }
 
-#container *:last-child {
-  margin-bottom: 0
-}
-
-#container footer {
-  margin: 2em 0;
+footer {
+  border-top: 1px solid #000000;
   font-size: 12px;
   text-align: center;
+}
+
+h1 {
+  margin: 2rem 0;
+}
+
+h2 {
+  margin: 1rem 0;
+}
+
+ul {
+  margin: 1rem 0;
+}
+
+p {
+  margin: 1rem 0;
 }
