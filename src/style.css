@@ -42,3 +42,7 @@ ul {
 p {
   margin: 1rem 0;
 }
+
+img.contact {
+  vertical-align: middle;
+}
