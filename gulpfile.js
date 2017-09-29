@@ -4,7 +4,13 @@ var cleanCSS = require("gulp-clean-css");
 var sourcemaps = require("gulp-sourcemaps");
 
 gulp.task("default", function() {
-  return gulp.src(["node_modules/normalize.css/normalize.css", "src/style.css"])
+  srcFiles = [
+    "node_modules/normalize.css/normalize.css",
+    "src/style.css",
+    "src/mobile.css"
+  ];
+
+  return gulp.src(srcFiles)
     .pipe(sourcemaps.init())
       .pipe(concat("style.css"))
       .pipe(cleanCSS())

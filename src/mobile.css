@@ -1,0 +1,21 @@
+@media (max-width: 414px) {
+  html {
+    font-size: 12px;
+  }
+
+  #container {
+    width: 90%;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  h2 {
+    font-size: 16px;
+  }
+
+  img.contact {
+    height: 12px;
+  }
+}
