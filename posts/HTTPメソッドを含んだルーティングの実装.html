@@ -1,0 +1,56 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="viewport" content="width=content-width,initial-scale=1"><title>naoty.github.io</title><link rel="stylesheet" href="../homepage.css"></head><body><div class="container"><main><article><header class="post-header"><h1 class="post-title">HTTPメソッドを含んだルーティングの実装</h1><p class="post-metadata">公開：<time datetime="2017-11-18T02:45:19.000Z">2017/11/18 11:45:19</time></p></header><section class="post-content"><p>最近GoによるWebアプリケーション開発を学び始めたので間違っている箇所があればコメントください。</p><h1 id="servemux-">ServeMux型によるルーティング</h1><p><code>http.Handle</code>関数を使うとパスに対するルーティングを登録することができる。<code>http.Handler</code>型は実際にリクエストを処理するオブジェクトで、下のように実装すると<code>/foods</code>へのリクエストを<code>*FoodsHandler</code>型が処理することになる。</p><pre><code class="lang-go">http.Handle(&quot;/foods&quot;, &amp;handlers.FoodsHandler{})
+</code></pre><p><code>http.Handle</code>関数によって登録されたルーティングは<code>http.DefaultServeMux</code>という<code>*ServeMux</code>型の変数が保持することになる。</p><pre><code class="lang-go">type ServeMux struct {
+    mu    sync.RWMutex
+    m     map[string]muxEntry
+    hosts bool
+}
+
+type muxEntry struct {
+    h       Handler
+    pattern string
+}
+</code></pre><p>登録されたルーティングはフィールド<code>m</code>で保持される。サーバーは<code>m</code>から一致するパスを探し、対応する<code>Handler</code>を呼び出す。</p><p>見たところ、<code>ServeMux</code>型では<code>GET</code>, <code>POST</code>等のHTTPメソッドを考慮していない。RESTful APIを実装するにはHTTPメソッドを考慮する必要があるため、<code>ServeMux</code>型によるルーティングでは不十分だと分かる。そこで、ルーティングを自前で実装する。</p><h1 id="handler-">Handlerによるルーティング</h1><p><code>http.Handle</code>関数の代わりに<code>http.ListenAndServe</code>関数に渡す<code>http.Handler</code>によってルーティングを実装する。</p><pre><code class="lang-go">http.ListenAndServe(&quot;:8080&quot;, handler)
+</code></pre><p><code>http.DefaultServeMux</code>を使う場合は<code>handler</code>の代わりに<code>nil</code>を渡すが、自前のハンドラーを使う場合はここに渡す。</p><pre><code class="lang-go">type RoutesHandler struct {
+    routes map[string]map[string]http.Handler
+}
+
+func (h *RoutesHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+    paths, ok := h.routes[r.Method]
+    if !ok {
+        w.WriteHeader(http.StatusNotFound)
+        return
+    }
+
+    handler, ok := paths[r.URL.Path]
+    if !ok {
+        w.WriteHeader(http.StatusNotFound)
+        return
+    }
+
+    handler.ServeHTTP(w, r)
+}
+</code></pre><p><code>*ServeMux</code>型とは違い、<code>map[string]map[string]http.Handler</code>型のフィールド<code>routes</code>でHTTPメソッドを含むルーティングを管理するようにした。<code>ServeHTTP</code>関数を実装することで<code>http.Handler</code>型のインターフェイスを満たしている。内部で<code>routes</code>から一致するハンドラーを呼び出す。</p><pre><code class="lang-go">func (h *RoutesHandler) GET(path string, handler http.Handler) {
+    h.register(&quot;GET&quot;, path, handler)
+}
+
+func (h *RoutesHandler) POST(path string, handler http.Handler) {
+    h.register(&quot;POST&quot;, path, handler)
+}
+
+func (h *RoutesHandler) register(method, path string, handler http.Handler) {
+    if h.routes == nil {
+        h.routes = make(map[string]map[string]http.Handler)
+    }
+
+    _, ok := h.routes[method]
+    if !ok {
+        h.routes[method] = make(map[string]http.Handler)
+    }
+
+    h.routes[method][path] = handler
+}
+</code></pre><p>こうした関数を定義し、ルーティングを登録できるようにする。</p><pre><code class="lang-go">routesHandler := &amp;handlers.RoutesHandler{}
+routesHandler.GET(&quot;/foods&quot;, &amp;handlers.FoodsHandler{})
+
+http.ListenAndServe(&quot;:8080&quot;, routesHandler)
+</code></pre></section></article></main><footer><p>© 2017 Naoto Kaneko</p></footer></div></body></html>
