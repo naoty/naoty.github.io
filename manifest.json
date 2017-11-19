@@ -1,6 +1,6 @@
 {
   "background_color": "white",
-  "name": "Naoto Kaneko",
+  "display": "standalone",
   "icons": [
     {
       "sizes": "48x48",
@@ -38,6 +38,7 @@
       "type": "image/png"
     }
   ],
+  "name": "Naoto Kaneko",
   "short_name": "Naoto Kaneko",
   "theme_color": "white"
 }
