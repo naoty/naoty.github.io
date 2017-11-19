@@ -1,4 +1,5 @@
 {
+  "background_color": "white",
   "name": "Naoto Kaneko",
   "icons": [
     {
@@ -38,5 +39,5 @@
     }
   ],
   "short_name": "Naoto Kaneko",
-  "theme_color": "#FFFFFF"
+  "theme_color": "white"
 }
