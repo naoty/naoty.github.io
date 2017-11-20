@@ -1,0 +1,15 @@
+<!DOCTYPE html><html lang="ja" dir="ltr"><head><meta charset="utf-8"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>sample-post - Naoto Kaneko</title><meta name="description" content="Naoto Kaneko's homepage"><meta name="theme-color" content="white"><link rel="icon" type="image/png" href="/icons/favicon.png"><link rel="apple-touch-icon" href="/icons/apple-touch-icon.png"><link rel="stylesheet" href="/homepage.css"><link rel="manifest" href="/manifest.json"></head><body><div class="container"><main><article><header class="post-header"><h1 class="post-title">sample-post</h1><p class="post-metadata">公開：<time datetime="2017-11-20T09:53:26.000Z">2017/11/20 18:53:26</time></p></header><section class="post-content"><p>最初のバージョンはSwiftが出た2014年だった。それ以降、細かな機能追加やバグ修正を繰り返し、0.5.0でSwift 2.3、0.6.0でSwift 3に対応した。どこかのタイミングで多くのStar、issueがつくようになり、多くのユーザーが使ってくれるようになった。</p><p>そして昨日、ようやく安定版となる1.0.0をリリースした。1.0.0では破壊的な変更を行った。</p><h1 id="-">メソッド名の変更</h1><pre><code class="lang-swift">// 0.6.0
+Date.date(year: 2016, month: 10, day: 31)
+&quot;2016-10-31T12:00:00+0900&quot;.dateFromFormat(&quot;yyyy-MM-dd&#39;T&#39;HH:mm:ssZ&quot;)
+
+// 1.0.0
+Date(year: 2016, month: 10, day: 31)
+&quot;2016-10-31T12:00:00+0900&quot;.date(inFormat: &quot;yyyy-MM-dd&#39;T&#39;HH:mm:ssZ&quot;)
+</code></pre><p>よりSwiftらしく、またSwift 3の命名規則に沿ったものに変更した。</p><h1 id="-">タイムゾーンのサポートをやめた</h1><p>個別の日付オブジェクトについてタイムゾーンをサポートするようにしていたが、バグになりかねない部分であり、後述するメンテナンスコストを下げていく方針に合わないため、この機能を削除した。</p><h1 id="duration-">Durationの内部表現を変更した</h1><p>これまでのバージョンでは、期間を表す概念として<code>Duration</code>というstructを用意していたが、これをやめた。本来、期間を表す概念として<code>DateComponents</code>というものがあるため（これまで<code>DateComponents</code>が期間を表すということをちゃんと認識してなかった）、これを最大限利用した。この変更によって、1.0.0では新たに以下のような計算や処理が可能になった。</p><pre><code class="lang-swift">// 1.0.0
+Date() + (3.hours - 30.minutes)
+(3.hours - 30.minutes).string(in: .abbreviated) //=&gt; &quot;2h 30m&quot;
+</code></pre><h1 id="-">固定フォーマットでの出力をやめた</h1><pre><code class="lang-swift">// 0.6.0
+1.weeks.later.stringFromFormat(&quot;yyyy/MM/dd&quot;)
+</code></pre><p>上のようなメソッドをやめた。<code>DateFormatter</code>で簡単に実装できるが、この機能は暦やロケールを考慮していない実装なのであまりオススメできない。その代わりに<code>DateFormatter.Style</code>を指定して出力できるようにした。</p><pre><code class="lang-swift">// 1.0.0
+1.weeks.later.dateString(in: .short)
+</code></pre><p>望ましい機能は実装しやすくする。望ましくない機能は実装しにくくする。というのが理想的なAPIのインターフェイスであるように思う。</p><h1 id="-">変更の背景</h1><p>OSSにかけられる時間が減った。メンテナンスコストを下げたかった。バグが出やすい機能はできるだけ削った。機能が豊富な日付操作ライブラリは他にもある。そんな中、最小限の機能でバグがなく正確で少し読めば何をしているか分かるようなライブラリが理想的だとおもった。</p></section><footer class="post-footer"><p><a href="/">トップ</a> | <a href="/posts/">一覧</a></p></footer></article></main><footer class="container-footer"><p>© 2017 Naoto Kaneko</p></footer></div></body></html>
