@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja">
+  <id>https://naoty.github.io/posts/index.atom</id>
+  <title>Naoto Kaneko's posts</title>
+  <updated>2018-01-08T08:57:00.000+09:00</updated>
+  <link rel="self" href="https://naoty.github.io/posts/index.atom"/>
+  <author>
+    <name>Naoto Kaneko</name>
+  </author>
+  
+  <entry>
+    <title>よく使うLaTeXコマンド</title>
+    <link rel="alternate" href="https://naoty.github.io/posts/12.md"/>
+    <id>https://naoty.github.io/posts/12.md</id>
+    <updated>2018-01-08T08:57:00.000+09:00</updated>
+    <summary>Jupyter Notebookでよく使っているLaTeXコマンドをまとめた</summary>
+  </entry>
+  
+  <entry>
+    <title>「みんなのPython」を読んだ</title>
+    <link rel="alternate" href="https://naoty.github.io/posts/11.md"/>
+    <id>https://naoty.github.io/posts/11.md</id>
+    <updated>2017-12-31T11:42:00.000+09:00</updated>
+    <summary>Pythonの勉強を始めるため「みんなのPython」を読みました</summary>
+  </entry>
+  
+  <entry>
+    <title>画像アップロードの実装パターン</title>
+    <link rel="alternate" href="https://naoty.github.io/posts/10.md"/>
+    <id>https://naoty.github.io/posts/10.md</id>
+    <updated>2017-12-22T17:12:00.000+09:00</updated>
+    <summary>画像アップロードの実装パターンを3つにまとめてみた</summary>
+  </entry>
+  
+  <entry>
+    <title>todoをtmuxで表示する</title>
+    <link rel="alternate" href="https://naoty.github.io/posts/9.md"/>
+    <id>https://naoty.github.io/posts/9.md</id>
+    <updated>2017-12-22T13:34:00.000+09:00</updated>
+    <summary>naoty/todoを改良して次のtodoをtmuxのstatus lineに表示できるようにした</summary>
+  </entry>
+  
+  <entry>
+    <title>2017年に作ったもの</title>
+    <link rel="alternate" href="https://naoty.github.io/posts/8.md"/>
+    <id>https://naoty.github.io/posts/8.md</id>
+    <updated>2017-12-21T23:00:00.000+09:00</updated>
+    <summary>2017年に作ったものを振り返りました</summary>
+  </entry>
+  
+  <entry>
+    <title>Circle CI 2.0への移行作業</title>
+    <link rel="alternate" href="https://naoty.github.io/posts/7.md"/>
+    <id>https://naoty.github.io/posts/7.md</id>
+    <updated>2017-12-12T22:35:00.000+09:00</updated>
+    <summary>RailsプロジェクトをCircle CI 2.0に移行した</summary>
+  </entry>
+  
+  <entry>
+    <title>ActiveRecordのattributeメソッド</title>
+    <link rel="alternate" href="https://naoty.github.io/posts/6.md"/>
+    <id>https://naoty.github.io/posts/6.md</id>
+    <updated>2017-12-08T23:00:00.000+09:00</updated>
+    <summary>ActiveRecordのattributeは</summary>
+  </entry>
+  
+  <entry>
+    <title>GitHub Pagesの更新をCIで自動化した</title>
+    <link rel="alternate" href="https://naoty.github.io/posts/5.md"/>
+    <id>https://naoty.github.io/posts/5.md</id>
+    <updated>2017-12-08T00:04:00.000+09:00</updated>
+    <summary>GitHub Pagesのための更新作業を手作業からCircleCIに変更した。</summary>
+  </entry>
+  
+  <entry>
+    <title>ブログで使うHTML5</title>
+    <link rel="alternate" href="https://naoty.github.io/posts/4.md"/>
+    <id>https://naoty.github.io/posts/4.md</id>
+    <updated>2017-12-03T20:03:00.000+09:00</updated>
+    <summary>ブログをセマンティックに記述するためのHTML5のタグを調べた</summary>
+  </entry>
+  
+  <entry>
+    <title>モデルに記述する順番</title>
+    <link rel="alternate" href="https://naoty.github.io/posts/3.md"/>
+    <id>https://naoty.github.io/posts/3.md</id>
+    <updated>2017-12-02T23:02:00.000+09:00</updated>
+    <summary>Railsでモデルに記述する順番について考えてみた</summary>
+  </entry>
+  
+  <entry>
+    <title>モデルの差分更新</title>
+    <link rel="alternate" href="https://naoty.github.io/posts/2.md"/>
+    <id>https://naoty.github.io/posts/2.md</id>
+    <updated>2017-12-01T21:40:00.000+09:00</updated>
+    <summary>モデルの差分更新</summary>
+  </entry>
+  
+  <entry>
+    <title>GitHub Pagesに移行した</title>
+    <link rel="alternate" href="https://naoty.github.io/posts/1.md"/>
+    <id>https://naoty.github.io/posts/1.md</id>
+    <updated>2017-11-29T17:12:00.000+09:00</updated>
+    <summary>はてなブログからGitHub Pagesに移行した</summary>
+  </entry>
+  
+</feed>
