@@ -2,11 +2,26 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja">
   <id>https://naoty.github.io/posts/index.atom</id>
   <title>Naoto Kaneko's posts</title>
-  <updated>2018-01-08T08:57:00.000+09:00</updated>
+  <updated>2018-01-12T21:08:00.000+09:00</updated>
   <link rel="self" href="https://naoty.github.io/posts/index.atom"/>
   <author>
     <name>Naoto Kaneko</name>
   </author>
+  
+  <entry>
+    <title>Atom形式のフィードをサポートした</title>
+    <link rel="alternate" href="https://naoty.github.io/posts/13.md"/>
+    <id>https://naoty.github.io/posts/13.md</id>
+    <updated>2018-01-12T21:08:00.000+09:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <p>Atom形式のフィードをサポートした。一覧画面と詳細画面の下部にあるリンクからアクセスできる。</p>
+<p>Livedoor Reader時代からずっとRSSリーダーを使っており、今はFeedlyを使っている。Twitterやはてなブックマークのタイムラインでは、時間の経過とともに見逃してしまうが、RSSリーダーであれば未読がどんどん積まれるだけなので見逃す心配がなく、それが使い続けている理由になっている。</p>
+<p>ブログを更新したとき自分でTwitterでリンクを公開するのがなんとなくこそばゆい気持ちになる。シェアしなければしないで、誰も気づかないだろうから、それも寂しい。だから、更新されたら勝手にフィードが生成されて通知される方が気が楽だ。これで他人の目を気にせずどんどん記事を更新できるし、読者との距離感を気にせずに済む。</p>
+
+      </div>
+    </content>
+  </entry>
   
   <entry>
     <title>よく使うLaTeXコマンド</title>
