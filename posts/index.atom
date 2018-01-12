@@ -13,7 +13,79 @@
     <link rel="alternate" href="https://naoty.github.io/posts/12.md"/>
     <id>https://naoty.github.io/posts/12.md</id>
     <updated>2018-01-08T08:57:00.000+09:00</updated>
-    <summary>Jupyter Notebookでよく使っているLaTeXコマンドをまとめた</summary>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <p>最近、Jupyter Notebookを使って機械学習を学び始めた。数式が頻繁に出てくるため、LaTeXを初めて使うようになった。</p>
+<p>自分のためのメモとして、よく使う数式とその記法をまとめた。</p>
+<table>
+  <thead>
+    <tr>
+      <th>記法</th>
+      <th>数式</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>$x^{-2}$</code></td>
+      <td>$x^{-2}$</td>
+    </tr>
+    <tr>
+      <td><code>$x_{12}$</code></td>
+      <td>$x_{12}$</td>
+    </tr>
+    <tr>
+      <td><code>$\frac{1}{2}$</code></td>
+      <td>$\frac{1}{2}$</td>
+    </tr>
+    <tr>
+      <td><code>$y = 2x + 1 \tag{1}$</code></td>
+      <td>$y = 2x + 1 \tag{1}$</td>
+    </tr>
+    <tr>
+      <td><code>$\frac{\partial L}{\partial W}$</code></td>
+      <td>$\frac{\partial L}{\partial W}$</td>
+    </tr>
+    <tr>
+      <td><pre><code>$$
+\begin{align}
+x + y = 3 \tag{1} \\
+2x - y = 0 \tag{2}
+\end{align}
+$$</code></pre></td>
+      <td>$$
+\begin{align}
+x + y = 3 \tag{1} \\
+2x - y = 0 \tag{2}
+\end{align}
+$$</td>
+    </tr>
+    <tr>
+      <td><pre><code>$$
+\sum_{i=0}^{k} x_{k}
+$$</code></pre></td>
+      <td>$$
+\sum_{i=0}^{k} x_k
+$$</td>
+    </tr>
+    <tr>
+      <td><pre><code>$$
+\begin{pmatrix}
+1 &amp; 2 \\
+3 &amp; 4
+\end{pmatrix}
+$$</code></pre></td>
+      <td>$$
+\begin{pmatrix}
+1 &amp; 2 \\
+3 &amp; 4
+\end{pmatrix}
+$$</td>
+    </tr>
+  </tbody>
+</table>
+
+      </div>
+    </content>
   </entry>
   
   <entry>
@@ -21,7 +93,22 @@
     <link rel="alternate" href="https://naoty.github.io/posts/11.md"/>
     <id>https://naoty.github.io/posts/11.md</id>
     <updated>2017-12-31T11:42:00.000+09:00</updated>
-    <summary>Pythonの勉強を始めるため「みんなのPython」を読みました</summary>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <p>年末年始はPythonや機械学習の勉強をしようと思い、<a href="http://amzn.to/2CpqmH1">みんなのPython</a>を読んだ。</p>
+<p>数年間Rubyを書いているため、そこまで苦労せずPythonを学ぶことができた。1週間程度でざっと読了した。勉強になったことは次のようなことだった。</p>
+<ul>
+<li><code>int()</code>のような関数に見えるものは<code>int</code>という組み込みクラスのイニシャライザであること。</li>
+<li>リスト内包表記やディクショナリ内包表記。これがあれば、<code>map</code>や<code>filter</code>といった関数型プログラミングでよく出てくる関数は不要そう。</li>
+<li>モジュールとパッケージは、それぞれスクリプトファイルとそれを含むディレクトリであること。</li>
+<li>Jupyter Notebookの使い方。これによって、今後のPythonの学習において効率的に試行錯誤やメモをとることができそう。</li>
+<li>Python2系と3系の差。インターネットや少し古い書籍ではまだPython2系が使われていることがあるため、差を頭に入れておけば自分の中で変換ができるようになる。</li>
+</ul>
+<p>あとは、標準ライブラリや周辺知識を調べながらアプリケーションを作っていけばPythonを書けるようになりそう。</p>
+<p>次は<a href="http://amzn.to/2CkUR0N">ゼロから作るDeep Learning</a>を読むことにした。</p>
+
+      </div>
+    </content>
   </entry>
   
   <entry>
@@ -29,7 +116,39 @@
     <link rel="alternate" href="https://naoty.github.io/posts/10.md"/>
     <id>https://naoty.github.io/posts/10.md</id>
     <updated>2017-12-22T17:12:00.000+09:00</updated>
-    <summary>画像アップロードの実装パターンを3つにまとめてみた</summary>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <p>画像アップロードの実装は考えれば考えるほど難しい。サーバーサイドはもちろんのこと、インフラやフロントエンドにわたって幅広く知識が求められる。</p>
+<p>これまでの経験を基に画像アップロードの実装パターンを3パターンにまとめてみた。</p>
+<ol>
+<li>同期アップロード</li>
+<li>非同期アップロード</li>
+<li>ダイレクトアップロード</li>
+</ol>
+<p>以下では、画像のアップロード先としてS3を想定する。また、画像のリサイズについては、画像リクエスト時にリサイズする方法などを考慮に加えると論点が発散しそうなので、いったん保留する。</p>
+<h1 id="-">同期アップロード</h1>
+<p><img src="/images/posts/10/synchronous-upload.png" alt="同期アップロードのシーケンス図"></p>
+<p>同期アップロードは、リクエストを受け取ったサーバーがS3に画像をアップロードするまでクライアントを待たせる。</p>
+<p>そのため、非常に大きい画像や複数の画像をアップロードした場合、レスポンスタイムが非常に長くなることが予想できる。通常、Webサーバーはリクエストボディのサイズに上限を設定したり、リクエストのタイムアウト時間を設定しているため、そのようなリクエストはタイムアウトになってしまうだろう。</p>
+<p>同期アップロードの実装は非同期アップロードに比べると簡単だし、非同期処理に伴う問題もない。だから、社内システムのようにユーザーを待たせても問題がない場合は同期アップロードを採用してもいいと思う。だけど、UI/UXが非常に悪いため、ユーザーが使う機能の実装としては採用できないと思う。</p>
+<h1 id="-">非同期アップロード</h1>
+<p><img src="/images/posts/10/asynchronous-upload.png" alt="非同期アップロードのシーケンス図"></p>
+<p>非同期アップロードは、リクエストを受け取ったサーバーとは別のワーカープロセスがバックグラウンドで画像をアップロードする。そのため、クライアントがレスポンスを受け取った時点ではアップロードが完了していない可能性がある。</p>
+<p>同期アップロードと比べると、レスポンスタイムが改善され、複数の画像をアップロードすることも可能になる。しかし、非同期アップロードを実装するにあたり、考えなくてはいけないことがいくつかある。</p>
+<ul>
+<li>アップロードが失敗した場合にリトライさせる手段をどのように提供するか（UI/UX観点）。</li>
+<li>ジョブキューとワーカープロセス、そしてワーカープロセスを管理するプロセスをどのように開発時に用意するか（開発環境観点）。</li>
+<li>サーバーとワーカーの間でどのようにアップロードされた画像を受け渡すか（インフラ観点）。</li>
+</ul>
+<p>それぞれの論点は、それだけで十分に1つの記事になりうるため、ここでは論点を挙げるだけに留めておきたい。</p>
+<h1 id="-">ダイレクトアップロード</h1>
+<p><img src="/images/posts/10/direct-upload.png" alt="ダイレクトアップロードのシーケンス図"></p>
+<p>ダイレクトアップロードは、クライアントからサーバーを介さずに直接S3にアップロードし、完了後にファイルパスなどの情報のみサーバーに送る。</p>
+<p>この方法でも、同期アップロードのようにクライアントを待たせるようなことはなく、複数の画像をアップロードできる。さらに、非同期アップロードのような複雑なアーキテクチャも必要がないため、スマートな方法のように思える。</p>
+<p>この場合、画像をサーバーで処理できないため、画像のファイル形式の検証やウイルススキャンなどをクライアントで行う必要がある。アプリであればiOSとAndroid両方で実装が必要になるため、全体の実装工数は3つの実装パターンの中で最も大きいかもしれない。</p>
+
+      </div>
+    </content>
   </entry>
   
   <entry>
@@ -37,7 +156,24 @@
     <link rel="alternate" href="https://naoty.github.io/posts/9.md"/>
     <id>https://naoty.github.io/posts/9.md</id>
     <updated>2017-12-22T13:34:00.000+09:00</updated>
-    <summary>naoty/todoを改良して次のtodoをtmuxのstatus lineに表示できるようにした</summary>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <p><img src="/images/posts/9/todo.gif" alt="次のtodoをtmuxのstatus lineに表示する"></p>
+<p><a href="https://github.com/naoty/todo">naoty/todo</a>に改良して、上のスクリーンキャストのようにtmuxのstatus lineに次のtodoを表示できるようにしてみた。</p>
+<p><code>next</code>というコマンドを追加し、最も優先順位の高いtodoを表示できるようにした。また、<code>done</code>コマンドに引数を指定しない場合に<code>next</code>で表示されるtodoを完了できるようにした。<code>done</code>コマンドなどで次のtodoが変わっても、tmuxが自動的に更新してくれるのですぐに切り替わる。</p>
+<p>iTerm2の画面分割を使っていたためtmuxは使ってこなかったが、status lineに次のtodoを表示するアイデアを思いついたため使い始めた。この使い方によって、次にやることを<code>list</code>コマンドで何度も確認する必要がなくなったし、次にやるべきことのみに集中できるため、とてもいい。</p>
+<h1 id="-">導入方法</h1>
+<p>まず、<a href="https://github.com/naoty/todo">naoty/todo</a>をインストールする。</p>
+<pre><code class="lang-bash">$ brew tap naoty/misc
+$ brew install todo
+</code></pre>
+<p>次に.tmux.confを以下のように修正する。</p>
+<pre><code class="lang-conf">set-option -g status-right-length 80
+if-shell &#39;which todo&#39; &#39;set-option -g status-right &quot;next: #(todo next)&quot;&#39;
+</code></pre>
+
+      </div>
+    </content>
   </entry>
   
   <entry>
@@ -45,7 +181,58 @@
     <link rel="alternate" href="https://naoty.github.io/posts/8.md"/>
     <id>https://naoty.github.io/posts/8.md</id>
     <updated>2017-12-21T23:00:00.000+09:00</updated>
-    <summary>2017年に作ったものを振り返りました</summary>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <p>2017年も終わろうとしているので、今年作ったものを振り返ってみた。こうやって振り返ってみると、今年もたくさん作った。今も使っているものもあるし、使っていないものもある。</p>
+<p>自分が抱えている問題を自分のコードで解決できるというのは、豊かな体験だとおもっている。来年も続けていけるように今年を振り返る。</p>
+<h1 id="-">使っているもの</h1>
+<h2 id="-table-https-github-com-naoty-table-"><a href="https://github.com/naoty/table">table</a></h2>
+<pre><code class="lang-bash">$ echo &quot;day\tDAU\n2017-01-01\t10000\n2017-01-02\t8000&quot; | table -H
++------------+-------+
+| day        | DAU   |
++------------+-------+
+| 2017-01-01 | 10000 |
+| 2017-01-02 | 8000  |
++------------+-------+
+</code></pre>
+<p><code>table</code>はタブ区切りの文字列をASCIIのテーブル形式に変換する。Google Spreadsheetなど表形式のテキストをSlackにコピペしたくて作った。そんなに使う頻度は多くないけど、使うときはとても便利でたまに使う。</p>
+<h2 id="-homebrew-misc-https-github-com-naoty-homebrew-misc-"><a href="https://github.com/naoty/homebrew-misc">homebrew-misc</a></h2>
+<pre><code class="lang-bash">$ brew tap naoty/misc
+</code></pre>
+<p>自作のちょっとしたツールを簡単にインストール・アンインストールするためにリポジトリを作った。今年作ったツールはここからHomebrewでインストールできるようにした。プライベートのPCで作ったツールを業務用のPCでインストールするときにラクなので作ってよかった。</p>
+<h2 id="fish-">fish-*</h2>
+<p>fishのためのプラグインをいくつか書いた。今年からzshからfishに移行した。fishにはfishermanというプラグイン管理ツールがあり、簡単にfishの機能を拡張できる。pecoを使ったスクリプトやプロンプトまでプラグインとして作った。</p>
+<h2 id="-license-https-github-com-naoty-license-"><a href="https://github.com/naoty/license">license</a></h2>
+<pre><code class="lang-bash">$ license &gt; LICENSE
+</code></pre>
+<p>MITのLICENSEファイルを出力するだけのツール。新しいリポジトリを作るときは初手で上を実行している。</p>
+<h2 id="-git-misc-https-github-com-naoty-git-misc-"><a href="https://github.com/naoty/git-misc">git-misc</a></h2>
+<pre><code class="lang-bash">$ git prune-branch
+$ git tag-timestamp
+</code></pre>
+<p>git-miscにはgit関連のスクリプトがいくつか入っている。その中でも<code>git-prune-branch</code>という不要なbranchを削除するコマンドはほぼ毎日使っている気がする。</p>
+<h2 id="-nippo-https-github-com-naoty-nippo-"><a href="https://github.com/naoty/nippo">nippo</a></h2>
+<pre><code class="lang-bash">$ nippo
+</code></pre>
+<p><code>nippo</code>はその名の通り日報を作るためのスクリプト。<code>2017-12-21.md</code>のようなファイル名でファイルを作成してエディタを起動する。今年は10月くらいから毎日日報をつけるようにした。このスクリプトのおかげで続いていると言っても過言ではないと思う。</p>
+<h2 id="-icon-https-github-com-naoty-icon-"><a href="https://github.com/naoty/icon">icon</a></h2>
+<pre><code class="lang-bash">$ icon
+</code></pre>
+<p><code>icon</code>は自分のアイコンを生成するためのツール。引数を指定することで自由なサイズで生成できるので、ダミー画像を作る用途でも使える。</p>
+<h2 id="-homepage-https-github-com-naoty-homepage-"><a href="https://github.com/naoty/homepage">homepage</a></h2>
+<p>このGitHub Pagesを管理するためのリポジトリ。既存の静的サイトジェネレーターを使わずにGulpプラグインだけでページを生成するようにしている。おかげで自由にカスタマイズすることができており、いまのところこのGitHub Pagesに移行してよかったと思っている。</p>
+<h1 id="-">使ってないもの</h1>
+<h2 id="-flock-https-github-com-naoty-flock-"><a href="https://github.com/naoty/flock">flock</a></h2>
+<p><code>flock</code>はSwiftのソースコードから依存関係を抽出し、dot形式のファイルを出力する。今年はほとんどSwiftを書いていないので使う機会がなかった。</p>
+<h2 id="-task-https-github-com-naoty-task-"><a href="https://github.com/naoty/Task">Task</a></h2>
+<p>TaskはWebフロントエンドの技術を学ぶために作ったElectronアプリで、<a href="https://github.com/naoty/todo">naoty/todo</a>のGUI版を意識して作った。CUIをそのままGUIにしただけでは、利便性ではCUIの方が優れていたため使うことはなかった。もう少しGUIの良さを活かしたタスク管理アプリケーションを作ってみたい。</p>
+<h2 id="-focus-theme-https-github-com-naoty-focus-theme-"><a href="https://github.com/naoty/focus-theme">focus-theme</a></h2>
+<p>はてなブログのために作ったテーマ。CSSの勉強のために書いてみた。結局、後述するGitHub Pagesに移行したため使わなくなった。</p>
+<h2 id="-brewery-https-github-com-naoty-brewery-"><a href="https://github.com/naoty/brewery">brewery</a></h2>
+<p><code>brewery</code>はHomebrewのformulaを作るためのツール。SHA256を生成するのがだんだんつらくて作ったけど、<code>shasum</code>を知ってから使う必要がなくなってしまった。</p>
+
+      </div>
+    </content>
   </entry>
   
   <entry>
@@ -53,7 +240,33 @@
     <link rel="alternate" href="https://naoty.github.io/posts/7.md"/>
     <id>https://naoty.github.io/posts/7.md</id>
     <updated>2017-12-12T22:35:00.000+09:00</updated>
-    <summary>RailsプロジェクトをCircle CI 2.0に移行した</summary>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <p>最近、RailsプロジェクトをCircle CI 2.0へ移行した。「テスト→Dockerイメージのビルド→レジストリへのPush」というワークフローを作った。</p>
+<pre><code class="lang-yml">workflows:
+  version: 2
+  build:
+    jobs:
+      - test
+      - build-image:
+          requires:
+            - test
+      - push-image:
+          requires:
+            - build-image
+</code></pre>
+<h1 id="-">テスト</h1>
+<p>テストでは、Circle CIのイメージを使うか、テスト前にDockerイメージをビルドしてそれをテストに使うか、というところで迷った。</p>
+<p>前者の場合、<code>circleci/ruby:2.4.2</code>のようなイメージを利用する。メリットとしては、テストが通ったコードのみDockerイメージをビルドするため、失敗した場合により速く完了する。僕のプロジェクトでは、Dockerイメージのビルドが最も時間がかかるため、この方法を採った。</p>
+<p>後者の場合、上記のようなワークフローの順番を入れ替えて、ビルドしたDockerイメージを<code>docker save</code>で永続化し、テスト前に<code>docker load</code>で再利用するような形になりそう。メリットとしては、開発環境とテスト環境（そして理想的には本番環境）をすべて揃えることができる。Dockerイメージのポータビリティを活かした方法だと思う。一方で、上記の通りDockerイメージのビルドに時間がかかる場合にワークフロー全体の完了に時間がかかってしまう。</p>
+<h1 id="docker-">Dockerイメージのビルド</h1>
+<p>Dockerイメージのビルドは最も時間がかかる部分だった。Dockerイメージのビルドはどの環境で行うのがベターなのかベストプラクティスが分からなかった。GCRにpushする都合で、<code>google/cloud-sdk</code>をDockerイメージとして使い、コンテナ上でDockerイメージをビルドすることになった。</p>
+<p>Circle CI 2.0では、<code>setup_remote_docker</code>というコマンドを使うことでコンテナと別の環境にDockerデーモンを起動しDockerイメージのビルドを行うことができる（<a href="https://circleci.com/docs/2.0/building-docker-images/">参考</a>）。課金してサポートに連絡すれば、過去のビルドで利用したレイヤーをキャッシュして再利用することができる。これを有効にできると、Dockerイメージのビルドを超高速化できそう。</p>
+<h1 id="-push">レジストリへのPush</h1>
+<p>僕のプロジェクトでは、GCRにビルドしたDockerイメージをPushしている。先述の通り、これを簡単に行うために<code>google/cloud-sdk</code>のDockerイメージを利用している。GCRを使う場合の<a href="https://circleci.com/docs/2.0/google-container-engine/">ドキュメント</a>を参考に設定をし、無事に移行できた。</p>
+
+      </div>
+    </content>
   </entry>
   
   <entry>
@@ -61,7 +274,40 @@
     <link rel="alternate" href="https://naoty.github.io/posts/6.md"/>
     <id>https://naoty.github.io/posts/6.md</id>
     <updated>2017-12-08T23:00:00.000+09:00</updated>
-    <summary>ActiveRecordのattributeは</summary>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <pre><code class="lang-rb">class User
+  attribute :unencrypted_password, :string
+end
+</code></pre>
+<ul>
+<li><code>attribute</code>メソッドはモデルに属性を追加する。</li>
+<li>DBのカラムがなくても追加できる。</li>
+<li>DBのカラムのアクセサをoverrideすることもできる。</li>
+</ul>
+<h1 id="-validation">例：パスワードのvalidation</h1>
+<p>パスワードのvalidationを実装する場合を考える。パスワードのvalidationというのは、暗号化される前の値に対して行われる。生パスワードはDBに保存しないが、アクセサがあると便利なので<code>attribute</code>メソッドで追加する。<code>attribute</code>メソッドで追加した仮想的なカラムにはvalidationが使える。</p>
+<pre><code class="lang-rb">class User
+  attribute :unencrypted_password, :string
+
+  before_save :encrypt_password, if: unencrypted_password_changed?
+
+  validates :unencrypted_password,
+    format: { with: /\A[0-9a-zA-Z]\z/ },
+    length: { minimum: 8, maximum: 36 },
+    presence: true
+
+  private
+
+  def encrypt_password
+    cost = BCrypt::Engine.cost
+    self.password = BCrypt::Password.create(unencrypted_password, cost)
+  end
+end
+</code></pre>
+
+      </div>
+    </content>
   </entry>
   
   <entry>
@@ -69,7 +315,54 @@
     <link rel="alternate" href="https://naoty.github.io/posts/5.md"/>
     <id>https://naoty.github.io/posts/5.md</id>
     <updated>2017-12-08T00:04:00.000+09:00</updated>
-    <summary>GitHub Pagesのための更新作業を手作業からCircleCIに変更した。</summary>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <p>GitHub Pagesの管理が煩雑だったため、Circle CIで自動化した。</p>
+<p>これまでは<a href="https://github.com/naoty/naoty.github.io">GitHub Pagesのリポジトリ</a>を<a href="https://github.com/naoty/homepage">管理リポジトリ</a>のサブモジュールとして管理していたが、サブモジュールはいろいろと作業が面倒だった。サブモジュールと本体の両方をgitでコミットするのがとにかく面倒だった。</p>
+<p>最近、仕事でCircle CI 2.0の対応をしているため、このブログの更新もCIに任せることができそうだと思い、さっそく設定をした。以下、ハマったところとか工夫したところとか。</p>
+<ul>
+<li>GitHub pagesのリポジトリをcloneする必要があったが、その際にSSH接続で<code>Are you sure you want to continue connecting (yes/no)?</code>と聞かれてしまい、ビルドが止まってしまった。そこで、以下のようにすることで回避した。</li>
+</ul>
+<pre><code class="lang-yaml">- run:
+    name: SSH settings
+    command: mkdir ~/.ssh/ &amp;&amp; echo -e &quot;Host github.com\n\tStrictHostKeyChecking no\n&quot; &gt; ~/.ssh/config
+</code></pre>
+<ul>
+<li>Circle CIで他のリポジトリにアクセスするには鍵を追加する必要があるため、設定画面から鍵を追加した。</li>
+<li>Circle CI上でgit commitする際に<code>username/repo@commit_id</code>の記法をメッセージに追加することで、GitHub pagesのコミットメッセージから対応する管理リポジトリのコミットに辿れるようにした。</li>
+</ul>
+<p>config.ymlは今のところ以下のようになっている。<code>npm install</code>でキャッシュを使っていないけど、そこらへんは徐々に最適化していきたい。</p>
+<pre><code class="lang-yaml">version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node
+    steps:
+      - run:
+          name: SSH settings
+          command: mkdir ~/.ssh/ &amp;&amp; echo -e &quot;Host github.com\n\tStrictHostKeyChecking no\n&quot; &gt; ~/.ssh/config
+      - run:
+          name: Clone GitHub pages
+          command: |
+            git clone git@github.com:naoty/naoty.github.io.git .
+            git config user.email &quot;naoty.k@gmail.com&quot;
+            git config user.name &quot;Naoto Kaneko&quot;
+          working_directory: ~/naoty.github.io
+      - checkout
+      - run: npm install
+      - run: npm run build
+      - run:
+          name: Publish GitHub pages
+          command: |
+            cp -pr public/* ~/naoty.github.io/
+            cd ~/naoty.github.io
+            git add .
+            git commit -m &quot;Publish naoty/homepage@${CIRCLE_SHA1}&quot;
+            git push origin master
+</code></pre>
+
+      </div>
+    </content>
   </entry>
   
   <entry>
@@ -77,7 +370,64 @@
     <link rel="alternate" href="https://naoty.github.io/posts/4.md"/>
     <id>https://naoty.github.io/posts/4.md</id>
     <updated>2017-12-03T20:03:00.000+09:00</updated>
-    <summary>ブログをセマンティックに記述するためのHTML5のタグを調べた</summary>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <p>ブログを作るにあたって適切なセマンティックを使おうと思い、HTML5のタグを調べた。</p>
+<h1 id="-">レイアウト</h1>
+<pre><code class="lang-html">&lt;article&gt;
+  &lt;header&gt;
+    &lt;h1&gt;ブログタイトル&lt;/h1&gt;
+    &lt;p&gt;公開：&lt;time datetime=&quot;2017-12-01T12:00:00.000+0900&quot;&gt;2017-12-01 12:00:00&lt;/time&gt;&lt;/p&gt;
+  &lt;/header&gt;
+  &lt;section&gt;
+    &lt;h1&gt;見出し1&lt;/h1&gt;
+    &lt;p&gt;本文&lt;/p&gt;
+  &lt;/section&gt;
+  &lt;footer&gt;
+    &lt;p&gt;&lt;a href=&quot;/&quot;&gt;トップ&lt;/a&gt;&lt;/p&gt;
+  &lt;/footer&gt;
+&lt;/article&gt;
+</code></pre>
+<ul>
+<li><code>&lt;article&gt;</code>：ブログのエントリーを表すために使う。</li>
+<li><code>&lt;header&gt;</code>, <code>&lt;footer&gt;</code>：ブログのヘッダーおよびフッターを表すために使う。このブログでは、ブログタイトルやメタデータをヘッダーに表示して、ナビゲーションのリンクをフッターに表示している。</li>
+<li><code>&lt;section&gt;</code>：ブログ本文をヘッダーやフッターと区別して表すために使う。</li>
+<li><code>&lt;time&gt;</code>：ブログのエントリーの公開日時を表すために使う。<code>datetime</code>属性によって公開日時を指定できる。</li>
+</ul>
+<h1 id="-">コード</h1>
+<pre><code class="lang-html">&lt;figure&gt;
+  &lt;figcaption&gt;app/models/pokemon.rb&lt;/figcaption&gt;
+  &lt;pre&gt;
+    &lt;code class=&quot;ruby&quot;&gt;
+    &lt;/code&gt;
+  &lt;/pre&gt;
+&lt;/figure&gt;
+</code></pre>
+<ul>
+<li><code>&lt;figure&gt;</code>：文書とは別に参考資料として付け加えたコンテンツを表すために使う。画像やコードに対して使えるようだ。</li>
+<li><code>&lt;figcaption&gt;</code>：参考資料のキャプションを表すために使う。</li>
+</ul>
+<h1 id="-">画像</h1>
+<pre><code class="lang-html">&lt;figure&gt;
+  &lt;figcaption&gt;図1&lt;/figcaption&gt;
+  &lt;picture&gt;
+    &lt;source srcset=&quot;/figure1-large.png, /figure1-large@2x.png 2x&quot; media=&quot;(min-width: 600px)&quot;&gt;
+    &lt;img src=&quot;/figure1.png&quot; srcset=&quot;/figure1.png, /figure1@2x.png 2x&quot; alt=&quot;図1&quot;&gt;
+  &lt;/picture&gt;
+&lt;/figure&gt;
+</code></pre>
+<ul>
+<li><code>&lt;picture&gt;</code>：条件に合わせて表示する画像を切り替えることができる。レスポンシブデザインをサポートしたり、画像の最適化のために使う。</li>
+<li><code>&lt;source&gt;</code>：複数のリソースを指定するために使う。</li>
+</ul>
+<h1 id="-">その他</h1>
+<ul>
+<li><code>&lt;ins&gt;</code>：追記されたテキストを表すために使う。<code>datetime</code>属性に追記日時を指定できる。</li>
+<li><code>&lt;del&gt;</code>：削除されたテキストを表すために使う。<code>datetime</code>属性に削除日時を指定できる。</li>
+</ul>
+
+      </div>
+    </content>
   </entry>
   
   <entry>
@@ -85,7 +435,57 @@
     <link rel="alternate" href="https://naoty.github.io/posts/3.md"/>
     <id>https://naoty.github.io/posts/3.md</id>
     <updated>2017-12-02T23:02:00.000+09:00</updated>
-    <summary>Railsでモデルに記述する順番について考えてみた</summary>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <p>他のメンバーがコードを読むときに知っておいてほしいことを意識して、以下の順に書いている。</p>
+<ol>
+<li>モジュール</li>
+<li>定数</li>
+<li>関連</li>
+<li>属性（<code>enum</code>, <code>attribute</code>など）</li>
+<li>コールバック</li>
+<li>バリデーション</li>
+<li>スコープ</li>
+<li>クラスメソッド</li>
+<li>インスタンスメソッド</li>
+<li>プライベートメソッド</li>
+</ol>
+<p>以下のコードは例のために書いてみたけど、動くかわからない。</p>
+<pre><code class="lang-rb">class Pokemon &lt; ApplicationRecord
+  include Tradable
+
+  INITIAL_HP_RANGE = 10..20
+
+  belongs_to :master
+  has_many :skills
+
+  enum gender: %i[male female]
+
+  before_validation :set_initial_hp, on: :create
+
+  validates :name, presence: true
+  validates :hp, numericality: { greater_than_or_equal_to: 0 }
+
+  scope :first_generation, -&gt; { where(id: (1..151).to_a) }
+
+  def self.capture
+    # ...
+  end
+
+  def attack
+    # ...
+  end
+
+  private
+
+  def set_initial_hp
+    self.hp = rand(INITIAL_HP_RANGE)
+  end
+end
+</code></pre>
+
+      </div>
+    </content>
   </entry>
   
   <entry>
@@ -93,7 +493,44 @@
     <link rel="alternate" href="https://naoty.github.io/posts/2.md"/>
     <id>https://naoty.github.io/posts/2.md</id>
     <updated>2017-12-01T21:40:00.000+09:00</updated>
-    <summary>モデルの差分更新</summary>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <p>アプリからデータのバックアップを受け取るときに、サーバー側で差分更新を行う必要がある。全部消去してから全部挿入するという実装も考えられるが、何かの実装ミスの際に全消去してしまうリスクがありそうなので避けたい。</p>
+<p>新しいデータと既存のデータを比較して、以下のような操作をする必要がある。</p>
+<ul>
+<li>新しいデータにも既存のデータにもあるデータを更新する。</li>
+<li>新しいデータにあるが、既存のデータにないデータを挿入する。</li>
+<li>新しいデータにないが、既存のデータにあるデータを削除する。</li>
+</ul>
+<p>これを実行するロジックをあらためて考えてみた。</p>
+<pre><code class="lang-rb">new_users = [{ id: 1, name: &quot;...&quot; }, { id: 2, name: &quot;...&quot; }]
+new_users_index = new_users.index_by { |new_user| new_user[:id] }
+
+User.all.in_batches do |users|
+  users.each do |user|
+    # インデックスから取得できたデータは取り除いていく
+    # 残ったデータはINSERT時に利用する
+    new_user = new_users_index.delete(user.id)
+
+    # 新しいデータに含まれているかチェック
+    if new_user.nil?
+      # 含まれていなければDELETE
+      user.destroy
+    else
+      # 含まれていればUPDATE
+      user.update_attributes(new_user)
+    end
+  end
+end
+
+# 残ったデータはすべてINSERTする
+new_users_index.values.each do |new_user|
+  User.create(new_user)
+end
+</code></pre>
+
+      </div>
+    </content>
   </entry>
   
   <entry>
@@ -101,7 +538,32 @@
     <link rel="alternate" href="https://naoty.github.io/posts/1.md"/>
     <id>https://naoty.github.io/posts/1.md</id>
     <updated>2017-11-29T17:12:00.000+09:00</updated>
-    <summary>はてなブログからGitHub Pagesに移行した</summary>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <p>ブログをはてなブログからGitHub Pagesに移行した。</p>
+<p>dev.toを見てからWebプログラマーのブログは高速に表示されるべきだと思うようになったので、GitHub Pagesに移行して、マークアップからすべてフルスクラッチすることにした。</p>
+<p>移行にあたっていくつかStatic Site Generatorを試してみたが、どれもしっくりこなかったので、gulpのプラグインを組み合わせてHTMLやCSSを組み立てることにした。コードは<a href="https://github.com/naoty/homepage">naoty/homepage</a>にある。</p>
+<p>以下、やったこととか気をつけたこと。</p>
+<ul>
+<li>ページの各コンテンツをmarkdownで書くようにして、ejsで書いたレイアウトに展開するようにした。これは既存のgulpプラグインではできなかったため、独自にgulpプラグインを書いた。</li>
+<li>各投稿からindexページを生成するようにした。ejsで書いたレイアウトに展開するようになっている。また、同時にファイルのmtimeを見てソートするようにしている。これも独自のgulpプラグインを書いて実現した。</li>
+<li>CSSはSASSで書いてCSSに変換して圧縮している。CSSはすべてHTMLの<code>&lt;style&gt;</code>タグ内につっこんでいる。こうすることで、CSSのレンダリングブロックを回避できるため、初回のレンダリングが少し速くなる。</li>
+<li>CSSを書く際に、モバイルファーストを念頭にまずスマホ表示を前提に書き始めた。そして、画面を広げながら、余白が気になる部分でメディアクエリを使って広い画面向けのスタイルを追加している。</li>
+<li>最終的なHTMLは圧縮している。ここらへん、できる限りファイルサイズを抑えてパフォーマンスを最適化しようとしている。結果的に、PageSpeed Insightsでほぼ100点をとれるようになった。</li>
+</ul>
+<p><img src="/images/posts/1/pagespeed-insights.png" alt="pagespeed-insights"></p>
+<ul>
+<li>ファイル名をURLに使おうとすると、濁点や半濁点を含むファイル名が表示できなくなることがある。これは、macOSのファイル名はUTF-8-MACと呼ばれるエンコーディングが使われているためで、濁点や半濁点が通常のUTF-8と異なるために起きているらしい。</li>
+<li>ファイル名には自然数を使うようにし、タイトルはfront matterで指定するようにした。front matterでは、タイトルの他に<code>description</code>や<code>og:image</code>を設定できるようにした。</li>
+<li>Lighthouseを参考にmanifest.jsonを書くなどPWAの要件を満たすようにした。</li>
+</ul>
+<p><img src="/images/posts/1/lighthouse.png" alt="lighthouse"></p>
+<ul>
+<li><a href="https://github.com/naoty/homepage">naoty/homepage</a>のpublicディレクトリをgitサブモジュールにして<a href="https://github.com/naoty/naoty.github.io">naoty/naoty.github.io</a>にpushするようにしている。</li>
+</ul>
+
+      </div>
+    </content>
   </entry>
   
 </feed>
