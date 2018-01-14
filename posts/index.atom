@@ -115,6 +115,21 @@ $$</td>
     </tr>
     <tr>
       <td><pre><code>$$
+y = \begin{cases}
+x &amp; (x &gt; 0) \\
+0 &amp; (x \leqq 0)
+\end{cases}
+$$</code></pre>
+      </td>
+      <td>$$
+y = \begin{cases}
+x &amp; (x &gt; 0) \\
+0 &amp; (x \leqq 0)
+\end{cases}
+$$</td>
+    </tr>
+    <tr>
+      <td><pre><code>$$
 \sum_{i=0}^{k} x_{k}
 $$</code></pre></td>
       <td>$$
