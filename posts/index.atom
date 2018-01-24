@@ -15,8 +15,7 @@
     <updated>2018-01-24T16:27:00.000+09:00</updated>
     <content type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
-        <p>このGitHub pagesのstylesheetは、これまでSASSで記述されGulpのパイプラインで処理されたCSSだった。</p>
-<p>今回、PostCSSを導入した。理由としては、PostCSSを通してマルチブラウザへの効率的な対応やCSSのlintを行いたかったからだ。</p>
+        <p>このGitHub pagesのstylesheetは、これまでSASSで記述されGulpのパイプラインで処理されたCSSだった。今回、PostCSSを導入した。理由としては、PostCSSを通してマルチブラウザへの効率的な対応やCSSのlintを行いたかったからだ。</p>
 <p>PostCSSの導入にともなって、SASSで記述していたstylesheetをcssnextで書き換えた。SASSのような独自記法を覚えるよりも標準的な規格を覚える方が学習コストを回収しやすい。ちょうどCoffeeScriptからECMAScript 6への移行と同じような感じだ。</p>
 <p>導入したPostCSSプラグインは以下の通り。</p>
 <ul>
