@@ -2,11 +2,33 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja">
   <id>https://naoty.github.io/posts/index.atom</id>
   <title>Naoto Kaneko's posts</title>
-  <updated>2018-01-13T09:53:00.000+09:00</updated>
+  <updated>2018-01-24T16:27:00.000+09:00</updated>
   <link rel="self" href="https://naoty.github.io/posts/index.atom"/>
   <author>
     <name>Naoto Kaneko</name>
   </author>
+  
+  <entry>
+    <title>PostCSSを導入した</title>
+    <link rel="alternate" href="https://naoty.github.io/posts/15.md"/>
+    <id>https://naoty.github.io/posts/15.md</id>
+    <updated>2018-01-24T16:27:00.000+09:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <p>このGitHub pagesのstylesheetは、これまでSASSで記述されGulpのパイプラインで処理されたCSSだった。</p>
+<p>今回、PostCSSを導入した。理由としては、PostCSSを通してマルチブラウザへの効率的な対応やCSSのlintを行いたかったからだ。</p>
+<p>PostCSSの導入にともなって、SASSで記述していたstylesheetをcssnextで書き換えた。SASSのような独自記法を覚えるよりも標準的な規格を覚える方が学習コストを回収しやすい。ちょうどCoffeeScriptからECMAScript 6への移行と同じような感じだ。</p>
+<p>導入したPostCSSプラグインは以下の通り。</p>
+<ul>
+<li><code>postcss-cssnext</code>：cssnextを導入する。これでcssで変数を利用したり、ネストした書き方ができる。<code>autoprefixer</code>が内部で使われており、サポートするブラウザに基づいてベンダープレフィックスを付与してくれる。</li>
+<li><code>postcss-import</code>：<code>@import</code>で宣言した外部のファイルを1つのファイルにまとめることができる。</li>
+<li><code>stylelint</code>：CSSのlintを行う。</li>
+<li><code>cssnano</code>：CSSの圧縮を行う。</li>
+</ul>
+
+      </div>
+    </content>
+  </entry>
   
   <entry>
     <title>スキーマファイルをSQL形式に変更する</title>
