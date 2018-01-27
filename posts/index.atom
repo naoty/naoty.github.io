@@ -10,8 +10,8 @@
   
   <entry>
     <title>PostCSSを導入した</title>
-    <link rel="alternate" href="https://naoty.github.io/posts/15.md"/>
-    <id>https://naoty.github.io/posts/15.md</id>
+    <link rel="alternate" href="https://naoty.github.io/posts/15.html"/>
+    <id>https://naoty.github.io/posts/15.html</id>
     <updated>2018-01-24T16:27:00.000+09:00</updated>
     <content type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
@@ -31,8 +31,8 @@
   
   <entry>
     <title>スキーマファイルをSQL形式に変更する</title>
-    <link rel="alternate" href="https://naoty.github.io/posts/14.md"/>
-    <id>https://naoty.github.io/posts/14.md</id>
+    <link rel="alternate" href="https://naoty.github.io/posts/14.html"/>
+    <id>https://naoty.github.io/posts/14.html</id>
     <updated>2018-01-13T09:53:00.000+09:00</updated>
     <content type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
@@ -70,8 +70,8 @@
   
   <entry>
     <title>Atom形式のフィードをサポートした</title>
-    <link rel="alternate" href="https://naoty.github.io/posts/13.md"/>
-    <id>https://naoty.github.io/posts/13.md</id>
+    <link rel="alternate" href="https://naoty.github.io/posts/13.html"/>
+    <id>https://naoty.github.io/posts/13.html</id>
     <updated>2018-01-12T21:08:00.000+09:00</updated>
     <content type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
@@ -85,8 +85,8 @@
   
   <entry>
     <title>よく使うLaTeXコマンド</title>
-    <link rel="alternate" href="https://naoty.github.io/posts/12.md"/>
-    <id>https://naoty.github.io/posts/12.md</id>
+    <link rel="alternate" href="https://naoty.github.io/posts/12.html"/>
+    <id>https://naoty.github.io/posts/12.html</id>
     <updated>2018-01-08T08:57:00.000+09:00</updated>
     <content type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
@@ -180,8 +180,8 @@ $$</td>
   
   <entry>
     <title>「みんなのPython」を読んだ</title>
-    <link rel="alternate" href="https://naoty.github.io/posts/11.md"/>
-    <id>https://naoty.github.io/posts/11.md</id>
+    <link rel="alternate" href="https://naoty.github.io/posts/11.html"/>
+    <id>https://naoty.github.io/posts/11.html</id>
     <updated>2017-12-31T11:42:00.000+09:00</updated>
     <content type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
@@ -203,8 +203,8 @@ $$</td>
   
   <entry>
     <title>画像アップロードの実装パターン</title>
-    <link rel="alternate" href="https://naoty.github.io/posts/10.md"/>
-    <id>https://naoty.github.io/posts/10.md</id>
+    <link rel="alternate" href="https://naoty.github.io/posts/10.html"/>
+    <id>https://naoty.github.io/posts/10.html</id>
     <updated>2017-12-22T17:12:00.000+09:00</updated>
     <content type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
@@ -243,8 +243,8 @@ $$</td>
   
   <entry>
     <title>todoをtmuxで表示する</title>
-    <link rel="alternate" href="https://naoty.github.io/posts/9.md"/>
-    <id>https://naoty.github.io/posts/9.md</id>
+    <link rel="alternate" href="https://naoty.github.io/posts/9.html"/>
+    <id>https://naoty.github.io/posts/9.html</id>
     <updated>2017-12-22T13:34:00.000+09:00</updated>
     <content type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
@@ -268,8 +268,8 @@ if-shell &#39;which todo&#39; &#39;set-option -g status-right &quot;next: #(todo
   
   <entry>
     <title>2017年に作ったもの</title>
-    <link rel="alternate" href="https://naoty.github.io/posts/8.md"/>
-    <id>https://naoty.github.io/posts/8.md</id>
+    <link rel="alternate" href="https://naoty.github.io/posts/8.html"/>
+    <id>https://naoty.github.io/posts/8.html</id>
     <updated>2017-12-21T23:00:00.000+09:00</updated>
     <content type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
@@ -327,8 +327,8 @@ $ git tag-timestamp
   
   <entry>
     <title>Circle CI 2.0への移行作業</title>
-    <link rel="alternate" href="https://naoty.github.io/posts/7.md"/>
-    <id>https://naoty.github.io/posts/7.md</id>
+    <link rel="alternate" href="https://naoty.github.io/posts/7.html"/>
+    <id>https://naoty.github.io/posts/7.html</id>
     <updated>2017-12-12T22:35:00.000+09:00</updated>
     <content type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
@@ -361,8 +361,8 @@ $ git tag-timestamp
   
   <entry>
     <title>ActiveRecordのattributeメソッド</title>
-    <link rel="alternate" href="https://naoty.github.io/posts/6.md"/>
-    <id>https://naoty.github.io/posts/6.md</id>
+    <link rel="alternate" href="https://naoty.github.io/posts/6.html"/>
+    <id>https://naoty.github.io/posts/6.html</id>
     <updated>2017-12-08T23:00:00.000+09:00</updated>
     <content type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
@@ -402,8 +402,8 @@ end
   
   <entry>
     <title>GitHub Pagesの更新をCIで自動化した</title>
-    <link rel="alternate" href="https://naoty.github.io/posts/5.md"/>
-    <id>https://naoty.github.io/posts/5.md</id>
+    <link rel="alternate" href="https://naoty.github.io/posts/5.html"/>
+    <id>https://naoty.github.io/posts/5.html</id>
     <updated>2017-12-08T00:04:00.000+09:00</updated>
     <content type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
@@ -457,8 +457,8 @@ jobs:
   
   <entry>
     <title>ブログで使うHTML5</title>
-    <link rel="alternate" href="https://naoty.github.io/posts/4.md"/>
-    <id>https://naoty.github.io/posts/4.md</id>
+    <link rel="alternate" href="https://naoty.github.io/posts/4.html"/>
+    <id>https://naoty.github.io/posts/4.html</id>
     <updated>2017-12-03T20:03:00.000+09:00</updated>
     <content type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
@@ -522,8 +522,8 @@ jobs:
   
   <entry>
     <title>モデルに記述する順番</title>
-    <link rel="alternate" href="https://naoty.github.io/posts/3.md"/>
-    <id>https://naoty.github.io/posts/3.md</id>
+    <link rel="alternate" href="https://naoty.github.io/posts/3.html"/>
+    <id>https://naoty.github.io/posts/3.html</id>
     <updated>2017-12-02T23:02:00.000+09:00</updated>
     <content type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
@@ -580,8 +580,8 @@ end
   
   <entry>
     <title>モデルの差分更新</title>
-    <link rel="alternate" href="https://naoty.github.io/posts/2.md"/>
-    <id>https://naoty.github.io/posts/2.md</id>
+    <link rel="alternate" href="https://naoty.github.io/posts/2.html"/>
+    <id>https://naoty.github.io/posts/2.html</id>
     <updated>2017-12-01T21:40:00.000+09:00</updated>
     <content type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
@@ -625,8 +625,8 @@ end
   
   <entry>
     <title>GitHub Pagesに移行した</title>
-    <link rel="alternate" href="https://naoty.github.io/posts/1.md"/>
-    <id>https://naoty.github.io/posts/1.md</id>
+    <link rel="alternate" href="https://naoty.github.io/posts/1.html"/>
+    <id>https://naoty.github.io/posts/1.html</id>
     <updated>2017-11-29T17:12:00.000+09:00</updated>
     <content type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
