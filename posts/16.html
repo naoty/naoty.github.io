@@ -1,0 +1,35 @@
+<!DOCTYPE html><html lang="ja" dir="ltr"><head><script async src="https://www.googletagmanager.com/gtag/js?id=UA-110417654-1"></script><script>window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-110417654-1');</script><meta charset="utf-8"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FLOCSSを導入した</title><meta name="description" content="FLOCSSを導入しCSSのアーキテクチャを整理した"><meta name="author" content="Naoto Kaneko"><meta name="theme-color" content="white"><meta property="og:title" content="FLOCSSを導入した"><meta property="og:type" content="article"><meta property="og:image" content="https://naoty.github.io/icons/256x256.png"><meta property="og:url" content="https://naoty.github.io/posts/16.html"><meta property="og:description" content="FLOCSSを導入しCSSのアーキテクチャを整理した"><meta property="twitter:card" content="summary"><meta property="twitter:site" content="@naoty_k"><meta property="twitter:title" content="FLOCSSを導入した"><meta property="twitter:description" content="FLOCSSを導入しCSSのアーキテクチャを整理した"><meta property="twitter:image" content="https://naoty.github.io/icons/256x256.png"><link rel="icon" type="image/png" href="/icons/favicon.png"><link rel="apple-touch-icon" href="/icons/apple-touch-icon.png"><link rel="manifest" href="/manifest.json"><link rel="stylesheet" href="/stylesheets/application.css"><link rel="alternate" type="application/atom+xml" href="/posts/index.atom"></head><body><div class="container" itemscope itemtype="http://schema.org/BlogPosting"><main class="container__body"><article><header class="post__header"><h1 class="post__title" itemprop="mainEntityOfPage headline">FLOCSSを導入した</h1><p class="post__metadata">公開：<time datetime="2018-02-01T08:48:00.000+09:00" itemprop="datePublished dateModified">2018-02-01 08:48:00</time></p></header><section class="post__content" itemprop="articleBody"><p>このホームページのCSSを見直して<a href="https://github.com/hiloki/flocss">FLOCSS</a>を導入した。</p><p>さまざまなCSSアーキテクチャが提唱されているけど、仕事でFLOCSSが採用されそうなので試しにやってみようということでやってみた。</p><p>ディレクトリ構成はこんな感じ。</p><pre><code>stylesheets/
+├── application.css
+├── foundation
+│   ├── _base.css
+│   └── _variable.css
+├── layout
+│   └── _base.css
+└── object
+    ├── project
+    │   ├── _homepage.css
+    │   ├── _post.css
+    │   └── _posts.css
+    └── utility
+        └── _align.css
+</code></pre><p>markdownを変換したHTMLにstyleを与えるという制約上、クラスを使ったstyleを定義しにくい。なので、componentっぽいものもprojectにすべて含めてしまっている。これでいいのかはまだ分かっていないので、他のプロジェクトでも導入して試行錯誤してみたい。</p><p>ついでなので、最近意識しているCSSの書き方を挙げておきたい。</p><ul><li><code>font-size</code>, <code>margin</code>, <code>padding</code>では単位に<code>rem</code>を使う。</li><li><code>margin-top</code>を使わない。一貫して<code>margin-bottom</code>を使うことで、シンプルにレイアウトを組むことができる。</li><li><code>margin-bottom</code>の値は<code>&lt;h1&gt;</code>~<code>&lt;h6&gt;</code>と<code>&lt;li&gt;</code>を<code>1</code>とすると、その他のブロック要素を<code>2</code>にする。例えば、このブログでは以下のような感じにしている。</li></ul><pre><code>h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+li {
+  margin-bottom: 1rem;
+}
+
+p,
+ul,
+ol,
+pre,
+table {
+  margin-bottom: 2rem;
+}
+</code></pre></section><footer class="post__footer"><p class="u-text-center"><a href="/">トップ</a> | <a href="/posts/">一覧</a> | <a href="/posts/index.atom">Feed</a></p></footer></article></main><footer class="container__footer"><p class="u-text-center">© 2017 <span itemprop="author">Naoto Kaneko</span></p></footer></div></body></html>
