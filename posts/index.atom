@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja">
   <id>https://naoty.github.io/posts/index.atom</id>
   <title>Naoto Kaneko's posts</title>
-  <updated>2018-02-02T22:05:00.000+09:00</updated>
+  <updated>2018-02-03T22:41:00.000+09:00</updated>
   <link rel="self" href="https://naoty.github.io/posts/index.atom"/>
   <author>
     <name>Naoto Kaneko</name>
@@ -12,10 +12,10 @@
     <title>TerraformでAWSを学んでいる</title>
     <link rel="alternate" href="https://naoty.github.io/posts/17.html"/>
     <id>https://naoty.github.io/posts/17.html</id>
-    <updated>2018-02-02T22:05:00.000+09:00</updated>
+    <updated>2018-02-03T22:41:00.000+09:00</updated>
     <content type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
-        <p>最近、AWS上にインフラを構築する仕事をしている。これまでこうした仕事はしたことがなかったので、新しいことをいろいろ学んでいる。</p>
+        <p>最近、AWS上にインフラをセットアップする仕事をしている。これまでこうした仕事はしたことがなかったので、新しいことをいろいろ学んでいる。</p>
 <p>インフラの構築はTerraformを通して行っているため、コードからAWSについて学ぶことができる。新しいことを学ぶときはだいたい下のようなステップを踏んでいる。</p>
 <ol>
 <li>Terraformのコード例や社内のTerraformのコードを読む。</li>
@@ -24,6 +24,7 @@
 <li>Terraformのコードを書いてみる。</li>
 <li>コードレビューしてもらい、足りない点を補足する。</li>
 </ol>
+<p>Terraformのおかげでインフラをどのようにセットアップすればいいのかコードを通して理解できるようになった。他のインフラエンジニアの書いたTerraformのコードを読めば、ベストプラクティスを盗むことができる。まだ僕がRailsを始めたての頃はインフラというと、AWSのコンソールをポチポチする作業という感じで掴みにくい感じがしたが、いまはこのような便利なツールのおかげでかなり学習のハードルが下がったと思う。引き続きこの調子でAWSの経験値を効率的にためていきたい。</p>
 
       </div>
     </content>
