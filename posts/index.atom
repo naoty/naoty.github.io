@@ -2,11 +2,36 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja">
   <id>https://naoty.github.io/posts/index.atom</id>
   <title>Naoto Kaneko's posts</title>
-  <updated>2018-02-12T22:58:00.000+09:00</updated>
+  <updated>2018-02-18T12:08:00.000+09:00</updated>
   <link rel="self" href="https://naoty.github.io/posts/index.atom"/>
   <author>
     <name>Naoto Kaneko</name>
   </author>
+  
+  <entry>
+    <title>react-railsによるCSRF対策</title>
+    <link rel="alternate" href="https://naoty.github.io/posts/20.html"/>
+    <id>https://naoty.github.io/posts/20.html</id>
+    <updated>2018-02-18T12:08:00.000+09:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <p>最近、react-railsを使ってRails上でReactコンポーネントを実装している。フォームを実装する際、Railsのフォームヘルパーは自動的にCSRFトークンを送るように<code>&lt;input&gt;</code>を生成してくれるが、Reactコンポーネントでフォームを実装する場合はそれを自分で実装する必要がある。</p>
+<p>react-railsであれば、Reactコンポーネントにpropsを簡単に渡せるため、props経由でCSRFトークンを渡すことで実装することができる。</p>
+<pre><code>// new.html.slim
+= react_component &quot;SignUpForm&quot;,
+  { csrf_params: request_forgery_protection_token, csrf_token: form_authenticity_token }
+</code></pre><pre><code>// SignUpForm.jsx
+render() {
+  return (
+    &lt;form method=&quot;post&quot; action=&quot;/sign_up&quot;&gt;
+      &lt;input type=&quot;hidden&quot; name={this.props.csrfParams} value={this.props.csrfToken} /&gt;
+    &lt;/form&gt;
+  );
+}
+</code></pre>
+      </div>
+    </content>
+  </entry>
   
   <entry>
     <title>webpacker用のDockerfile</title>
