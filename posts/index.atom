@@ -2,11 +2,48 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja">
   <id>https://naoty.github.io/posts/index.atom</id>
   <title>Naoto Kaneko's posts</title>
-  <updated>2018-02-18T12:08:00.000+09:00</updated>
+  <updated>2018-02-18T21:53:00.000+09:00</updated>
   <link rel="self" href="https://naoty.github.io/posts/index.atom"/>
   <author>
     <name>Naoto Kaneko</name>
   </author>
+  
+  <entry>
+    <title>MailHogによるメールの受信確認</title>
+    <link rel="alternate" href="https://naoty.github.io/posts/21.html"/>
+    <id>https://naoty.github.io/posts/21.html</id>
+    <updated>2018-02-18T21:53:00.000+09:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <p>メール送信機能を開発する際、メールの受信を確認したい。従来のRailsアプリ開発では、<a href="https://github.com/ryanb/letter_opener">letter_opener</a>のようなライブラリを使っていた。</p>
+<p>現在のコンテナを中心とした開発環境では、Railsの外側にSMTPサーバーのコンテナを用意し、環境変数によって接続先を設定する方法が一般的ではないかと思った。調べてみると、<a href="https://github.com/mailhog/MailHog">MailHog</a>というツールが見つかった。MailHogはSMTPサーバーであり、かつ受信したメールを確認できるHTTPサーバーも兼ね備えている。</p>
+<p>MailHogはDocker Hubでコンテナを公開しているため、docker-composeを使うと簡単に開発環境に組み込むことができる。</p>
+<pre><code># docker-compose.yml
+services:
+  web:
+    build: .
+    command: bin/rails s -p 3000 -b 0.0.0.0
+    environment:
+      SMTP_HOST: mail
+      SMTP_PORT: 1025
+    depends_on:
+      - mail
+  mail:
+    image: mailhog/mailhog
+    ports:
+      - 8025:8025
+</code></pre><p>Railsではこんな感じで環境変数によってメールの送信先を設定するだけでいい。</p>
+<pre><code># application.rb
+config.action_mailer.delivery_method = :smtp
+config.action_mailer.smtp_settings = {
+  address: ENV[&quot;SMTP_HOST&quot;],
+  port: ENV[&quot;SMTP_PORT&quot;],
+}
+</code></pre><p>本番環境などでは、この環境変数を実際に運用するSMTPサーバーのものに替えるだけでいい。</p>
+
+      </div>
+    </content>
+  </entry>
   
   <entry>
     <title>react-railsによるCSRF対策</title>
