@@ -1,0 +1,49 @@
+<!DOCTYPE html><html lang="ja" dir="ltr"><head><script async src="https://www.googletagmanager.com/gtag/js?id=UA-110417654-1"></script><script>window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-110417654-1');</script><meta charset="utf-8"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>JSONをASCIIテーブルで表示する</title><meta name="description" content="naoty/tableにJSONをASCIIテーブルに表示する機能を追加した"><meta name="author" content="Naoto Kaneko"><meta name="theme-color" content="white"><meta property="og:title" content="JSONをASCIIテーブルで表示する"><meta property="og:type" content="article"><meta property="og:image" content="https://naoty.github.io/icons/256x256.png"><meta property="og:url" content="https://naoty.github.io/posts/22.html"><meta property="og:description" content="naoty/tableにJSONをASCIIテーブルに表示する機能を追加した"><meta property="twitter:card" content="summary"><meta property="twitter:site" content="@naoty_k"><meta property="twitter:title" content="JSONをASCIIテーブルで表示する"><meta property="twitter:description" content="naoty/tableにJSONをASCIIテーブルに表示する機能を追加した"><meta property="twitter:image" content="https://naoty.github.io/icons/256x256.png"><link rel="icon" type="image/png" href="/icons/favicon.png"><link rel="apple-touch-icon" href="/icons/apple-touch-icon.png"><link rel="manifest" href="/manifest.json"><link rel="stylesheet" href="/stylesheets/application.css"><link rel="alternate" type="application/atom+xml" href="/posts/index.atom"></head><body><div class="container" itemscope itemtype="http://schema.org/BlogPosting"><main class="container__body"><article><header class="post__header"><h1 class="post__title" itemprop="mainEntityOfPage headline">JSONをASCIIテーブルで表示する</h1><p class="post__metadata"><time datetime="2018-03-05T17:34:00.000+09:00" itemprop="datePublished dateModified">2018-03-05 17:34:00</time></p></header><section class="post__content" itemprop="articleBody"><style id="MathJax_SVG_styles">.MathJax_SVG_Display {text-align: center; margin: 1em 0em; position: relative; display: block!important; text-indent: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; width: 100%}
+.MathJax_SVG .MJX-monospace {font-family: monospace}
+.MathJax_SVG .MJX-sans-serif {font-family: sans-serif}
+.MathJax_SVG {display: inline; font-style: normal; font-weight: normal; line-height: normal; font-size: 100%; font-size-adjust: none; text-indent: 0; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0; min-height: 0; border: 0; padding: 0; margin: 0}
+.MathJax_SVG * {transition: none; -webkit-transition: none; -moz-transition: none; -ms-transition: none; -o-transition: none}
+.mjx-svg-href {fill: blue; stroke: blue}
+.MathJax_SVG_LineBox {display: table!important}
+.MathJax_SVG_LineBox span {display: table-cell!important; width: 10000em!important; min-width: 0; max-width: none; padding: 0; border: 0; margin: 0}</style><svg style="display: none;"><defs id="MathJax_SVG_glyphs"></defs></svg><p>もともとTSV形式の文字列をASCIIやMarkdown形式のテーブルに変換するコマンドだった<a href="https://github.com/naoty/table">naoty/table</a>を改善して、JSON形式の文字列を受け取れるようにした。</p><p>例えば、以下のようなJSONファイルがあったとする。</p><pre><code class="lang-json">// pokemons.json
+[
+  {
+    "id": 1,
+    "name": "bulbasaur"
+  },
+  {
+    "id": 2,
+    "name": "ivysaur"
+  },
+  {
+    "id": 3,
+    "name": "venusaur"
+  }
+]
+</code></pre><p>このとき、以下のようにパイプで<code>table</code>コマンドに渡すとASCII形式に変換できる。</p><pre><code class="lang-shell">$ cat pokemons.json | table -f json:ascii
++----+-----------+
+| id | name      |
++----+-----------+
+| 1  | bulbasaur |
+| 2  | ivysaur   |
+| 3  | venusaur  |
++----+-----------+
+</code></pre><p><code>table</code>コマンドは出力フォーマットとしてMarkdown形式のテーブルも選べるので、以下のように出力できる。</p><pre><code class="lang-shell">$ cat pokemons.json | table -f json:markdown
+| id | name      |
+| -- | --------- |
+| 1  | bulbasaur |
+| 2  | ivysaur   |
+| 3  | venusaur  |
+</code></pre><h1 id="-">モチベーション</h1><p>最近、AWSの作業をすることが増えてAWS CLIから返ってくるJSONを扱うことが増えた。返ってきたJSONを<code>jq</code>コマンドで整形して表示するのだけど、件数が増えるとかなり見にくかった。そこで、このような機能を追加してASCIIテーブルとして見やすくしたかったので追加してみた。</p><p>例えば、ECSのあるタスク定義に含まれるイメージを知りたいとき、こんな感じでやることになりそう。</p><pre><code class="lang-shell">$ aws ecs describe-task-definition --task-definition hello_world:8 | \
+  jq ".taskDefinition.containerDefinitions | map({name: .name, image: .image})" | \
+  table -f json:ascii
++-----------+-----------+
+| name      | image     |
++-----------+-----------+
+| wordpress | wordpress |
+| mysql     | mysql     |
++-----------+-----------+
+</code></pre></section><footer class="post__footer"><p class="u-text-center"><a href="/">トップ</a> | <a href="/posts/">一覧</a> | <a href="/posts/index.atom">Feed</a></p></footer></article></main><footer class="container__footer"><p class="u-text-center">© 2017 <span itemprop="author">Naoto Kaneko</span></p></footer></div></body></html>
