@@ -2,11 +2,40 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja">
   <id>https://naoty.github.io/posts/index.atom</id>
   <title>Naoto Kaneko's posts</title>
-  <updated>2018-03-05T17:34:00.000+09:00</updated>
+  <updated>2018-03-09T20:55:00.000+09:00</updated>
   <link rel="self" href="https://naoty.github.io/posts/index.atom"/>
   <author>
     <name>Naoto Kaneko</name>
   </author>
+  
+  <entry>
+    <title>Assets precompileに必要最小限のファイル</title>
+    <link rel="alternate" href="https://naoty.github.io/posts/23.html"/>
+    <id>https://naoty.github.io/posts/23.html</id>
+    <updated>2018-03-09T20:55:00.000+09:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <p>Dockerfileで<code>rails assets:precompile</code>を実行する前に<code>COPY</code>するファイルを必要最小限にしておけると、キャッシュを有効活用できてビルド時間を短縮できる。</p>
+<pre><code class="lang-dockerfile">WORKDIR /myapp
+
+COPY app/assets /myapp/
+COPY bin/rails /myapp/bin/
+COPY config/environments /myapp/config/environments/
+COPY config/initializers /myapp/config/initializers/
+COPY config/application.rb /myapp/config/application.rb
+COPY config/boot.rb /myapp/config/boot.rb
+COPY config/environment.rb /myapp/config/environment.rb
+COPY config/secrets.yml.enc /myapp/config/secrets.yml.enc
+COPY lib/assets /myapp/lib/assets/
+COPY vendor/assets /myapp/vendor/assets/
+COPY Rakefile /myapp/
+RUN bin/rails assets:precompile
+</code></pre>
+<p>とりあえずこれだけで動いた。<code>config/initializers/</code>以下も削れそうな気がするけど、プロジェクトによってケースバイケースだと思うので、これで十分だとおもう。</p>
+
+      </div>
+    </content>
+  </entry>
   
   <entry>
     <title>JSONをASCIIテーブルで表示する</title>
