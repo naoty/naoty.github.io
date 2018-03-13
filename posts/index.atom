@@ -2,11 +2,40 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja">
   <id>https://naoty.github.io/posts/index.atom</id>
   <title>Naoto Kaneko's posts</title>
-  <updated>2018-03-09T20:55:00.000+09:00</updated>
+  <updated>2018-03-13T21:22:00.000+09:00</updated>
   <link rel="self" href="https://naoty.github.io/posts/index.atom"/>
   <author>
     <name>Naoto Kaneko</name>
   </author>
+  
+  <entry>
+    <title>bin/webpackに必要最小限のファイル</title>
+    <link rel="alternate" href="https://naoty.github.io/posts/24.html"/>
+    <id>https://naoty.github.io/posts/24.html</id>
+    <updated>2018-03-13T21:22:00.000+09:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <p><a href="https://naoty.github.io/posts/23.html">前回</a>と同様にwebpackerによるbundleに必要最小限なファイルの<code>COPY</code>を試してみた。</p>
+<pre><code class="lang-dockerfile">FROM starefossen/ruby-node:2-8-alpine
+WORKDIR /myapp
+
+COPY app/javascript /myapp/app/javascript/
+COPY bin/webpack /myapp/bin/
+COPY config/webpack /myapp/config/webpack/
+COPY config/webpacker.yml /myapp/config/webpacker.yml
+COPY .babelrc .postcssrc.yml /myapp/
+COPY Gemfile Gemfile.lock /myapp/
+COPY --from=bundler /usr/local/bundle /usr/local/bundle
+RUN bin/webpack
+</code></pre>
+<ul>
+<li>webpackerを使うにはRubyとNodeの両方が必要になるため両方が入ったベースイメージを探したところ、<a href="https://hub.docker.com/r/starefossen/ruby-node/">starefossen/ruby-node</a>がよさそうだった。</li>
+<li><code>COPY --from=bundler</code>としているところは、<a href="https://docs.docker.com/develop/develop-images/multistage-build/">multi-stage build</a>を使っている。前段のビルドで<code>bundle install</code>しておいたものを<code>COPY</code>している。こうすることで実行時には不要なものを除くことができる。このビルド自体もRailsを起動するために必要なファイルを生成するビルドにすぎない。</li>
+</ul>
+
+      </div>
+    </content>
+  </entry>
   
   <entry>
     <title>Assets precompileに必要最小限のファイル</title>
