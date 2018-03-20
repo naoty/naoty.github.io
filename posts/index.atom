@@ -2,11 +2,58 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja">
   <id>https://naoty.github.io/posts/index.atom</id>
   <title>Naoto Kaneko's posts</title>
-  <updated>2018-03-13T21:22:00.000+09:00</updated>
+  <updated>2018-03-20T19:56:00.000+09:00</updated>
   <link rel="self" href="https://naoty.github.io/posts/index.atom"/>
   <author>
     <name>Naoto Kaneko</name>
   </author>
+  
+  <entry>
+    <title>webpackerにjestを導入する</title>
+    <link rel="alternate" href="https://naoty.github.io/posts/25.html"/>
+    <id>https://naoty.github.io/posts/25.html</id>
+    <updated>2018-03-20T19:56:00.000+09:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <p>webpackerを使ったRailsプロジェクトにjestを導入してみた。jestをインストールしてテストを実行してみると、以下のようなエラーがおきた。</p>
+<pre><code>({&quot;Object.&lt;anonymous&gt;&quot;:function(module,exports,require,__dirname,__filename,global,jest){import xxx from &#39;./xxx&#39;;
+                                                                                         ^^^^^^
+
+SyntaxError: Unexpected token import
+  at ScriptTransformer._transformAndBuildScript (node_modules/jest-runtime/build/script_transformer.js:316:17)
+</code></pre><p>importがコンパイルできていないようだ。webpackerが生成する<code>.babelrc</code>では、以下のように設定されている。</p>
+<pre><code class="lang-json">{
+  &quot;presets&quot;: [
+    [&quot;env&quot;, {
+      &quot;modules&quot;: false,
+      &quot;targets&quot;: {
+        &quot;browsers&quot;: &quot;&gt; 1%&quot;,
+        &quot;uglify&quot;: true
+      },
+      &quot;useBuiltIns&quot;: true
+    }],
+    &quot;react&quot;
+  ]
+}
+</code></pre>
+<p><code>&quot;modules&quot;: false</code>と設定されているため、<code>import</code>の変換が行われないようになっている。これはwebpackによって<code>import</code>文を処理するためにbabelでは<code>import</code>の変換を行わないようにしているんだと思う。</p>
+<p>しかし、jestを実行する場合はwebpackによる処理は行われないため、<code>import</code>が変換されずエラーになっていたと考えられそう。</p>
+<p>そこで、以下の設定を<code>.babelrc</code>に追加したところ直った。</p>
+<pre><code class="lang-json">{
+  &quot;env&quot;: {
+    &quot;test&quot;: {
+      &quot;presets&quot;: [
+        [&quot;env&quot;, { &quot;modules&quot;: &quot;commonjs&quot; }]
+      ]
+    }
+  }
+}
+</code></pre>
+<p>jestは実行時に自動的に<code>NODE_ENV</code>を<code>test</code>に設定するため、これでうまくいく。</p>
+
+      </div>
+    </content>
+  </entry>
   
   <entry>
     <title>bin/webpackに必要最小限のファイル</title>
