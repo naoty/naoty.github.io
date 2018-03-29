@@ -2,11 +2,58 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja">
   <id>https://naoty.github.io/posts/index.atom</id>
   <title>Naoto Kaneko's posts</title>
-  <updated>2018-03-20T19:56:00.000+09:00</updated>
+  <updated>2018-03-29T23:19:00.000+09:00</updated>
   <link rel="self" href="https://naoty.github.io/posts/index.atom"/>
   <author>
     <name>Naoto Kaneko</name>
   </author>
+  
+  <entry>
+    <title>RailsからReduxのinitial stateを設定する</title>
+    <link rel="alternate" href="https://naoty.github.io/posts/26.html"/>
+    <id>https://naoty.github.io/posts/26.html</id>
+    <updated>2018-03-29T23:19:00.000+09:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <pre><code class="lang-rb">def new
+  @user = User.new
+end
+</code></pre>
+<p>上のようなコントローラーで作ったデータをReduxのinitial stateとして設定したいと思い、いろいろ考えて書いてみた。</p>
+<p>まず、ヘルパーとかデコレーターでモデルをReactコンポーネントに渡すpropsに変換してみる。今回はactive_decoratorを使う。</p>
+<pre><code class="lang-rb">module UserDecorator
+  def to_react_props
+    as_json(only: %i[first_name last_name email])
+      .transform_keys { |key| key.camelcase(:lower) }
+      .transform_values { |value| value || &quot;&quot; }
+      .to_json
+  end
+end
+</code></pre>
+<p>これでモデルから必要な属性だけをcamelCaseのJSON文字列に変換できるようになった。</p>
+<p>次にRailsのviewでdata属性に上のpropsを渡す。あとでここからJSでデータを引っ張ってくる計画だ。</p>
+<pre><code class="lang-erb">&lt;div id=&quot;js-redux-root&quot; data-react-props=&quot;&lt;%= @user.to_react_props %&gt;&quot;&gt;
+&lt;/div&gt;
+</code></pre>
+<p>あとは、Reduxのstoreを作成するときに上のpropsを設定する。</p>
+<pre><code class="lang-javascript">document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; {
+  const rootElement = document.getElementById(&#39;js-redux-root&#39;);
+  const initialState = JSON.parse(rootElement.dataset.reactProps);
+  const store = createStore(rootReducer, initialState);
+
+  render(
+    &lt;Provider store={store}&gt;
+      &lt;SignUpForm /&gt;
+    &lt;/Provider&gt;
+  );
+});
+</code></pre>
+<p>これでRailsで作ったデータをReduxのinitial stateに設定できた。フォームの初期値を埋めておきたいときなど、コントローラーからReactコンポーネントにデータを渡せるとラクなので、こういう実装が必要になると思う。</p>
+<p>最近、ReactとかReduxを勉強しているので、これでいいのかよくわかりません。コードレビューお願いします。</p>
+
+      </div>
+    </content>
+  </entry>
   
   <entry>
     <title>webpackerにjestを導入する</title>
