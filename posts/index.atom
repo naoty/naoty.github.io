@@ -2,11 +2,32 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja">
   <id>https://naoty.github.io/posts/index.atom</id>
   <title>Naoto Kaneko's posts</title>
-  <updated>2018-03-29T23:19:00.000+09:00</updated>
+  <updated>2018-04-14T17:16:00.000+09:00</updated>
   <link rel="self" href="https://naoty.github.io/posts/index.atom"/>
   <author>
     <name>Naoto Kaneko</name>
   </author>
+  
+  <entry>
+    <title>作業メモという習慣</title>
+    <link rel="alternate" href="https://naoty.github.io/posts/27.html"/>
+    <id>https://naoty.github.io/posts/27.html</id>
+    <updated>2018-04-14T17:16:00.000+09:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <p>数ヶ月前から開発するときに作業メモをとりながら開発をするようにしている。スクショのようにエディタを上下に分割して上で作業しながら下でメモをとっている。</p>
+<p><img src="/images/posts/27/atom.png" alt="atom.png"></p>
+<p>作業メモという習慣を数ヶ月続けてみていいことが多かった。</p>
+<ul>
+<li>デバッグするときは、どこにバグがあるか仮説を作業メモにとりながら進める。頭の中だけでこれを行うのはけっこう大変で、脳のメモリが食いつぶされるのを感じる。</li>
+<li>作業が煮詰まったときに、これまでの作業を振り返るきっかけにもなる。</li>
+<li>土日や休日を挟んでから作業に戻るとき、どこまで何をしていたのか作業を振り返るときに便利だったりする。</li>
+<li>作業内容やそこから得られた知見を他人と共有する際に、作業メモをベースにしやすい。</li>
+</ul>
+
+      </div>
+    </content>
+  </entry>
   
   <entry>
     <title>RailsからReduxのinitial stateを設定する</title>
