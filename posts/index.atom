@@ -2,11 +2,40 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja">
   <id>https://naoty.github.io/posts/index.atom</id>
   <title>Naoto Kaneko's posts</title>
-  <updated>2018-04-22T09:55:00.000+09:00</updated>
+  <updated>2018-05-16T21:34:00.000+09:00</updated>
   <link rel="self" href="https://naoty.github.io/posts/index.atom"/>
   <author>
     <name>Naoto Kaneko</name>
   </author>
+  
+  <entry>
+    <title>zshに戻った</title>
+    <link rel="alternate" href="https://naoty.github.io/posts/30.html"/>
+    <id>https://naoty.github.io/posts/30.html</id>
+    <updated>2018-05-16T21:34:00.000+09:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <p>1年くらい前からシェルはfishを使っていたけど、最近zshに戻ってきた。理由としては、当時はやってなかったインフラの作業がメインの業務になり、シェルスクリプトを書くようになったからだ。fishはbashとの互換性がないので、bashを書くときに頭を切り替えるのが少しずつストレスになってきた。</p>
+<p>fishを使っていた頃は<a href="https://github.com/fisherman/fisherman">fisherman</a>というプラグインマネージャーを使っていたけど、zshでもプラガブルな設定は続けていきたいので<a href="https://github.com/zplug/zplug">zplug</a>を使い始めた。</p>
+<p>相変わらずzshのプラグインはいい感じのものがないので、またも自分で<a href="https://github.com/naoty/prompt">プロンプト</a>を書くことになった。世の中の人気のあるプロンプトのテーマは余計な情報が多くて重いので、結局いつも自分で書くことになっている。<a href="https://github.com/sindresorhus/pure">pure</a>はよさそうだったけど、二列に慣れず惜しくも採用できなかった。</p>
+
+      </div>
+    </content>
+  </entry>
+  
+  <entry>
+    <title>CourseraのMachine Learningを受講しはじめた</title>
+    <link rel="alternate" href="https://naoty.github.io/posts/29.html"/>
+    <id>https://naoty.github.io/posts/29.html</id>
+    <updated>2018-05-01T21:47:00.000+09:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <p>5月から<a href="https://www.coursera.org/learn/machine-learning">CourseraのMachile Learning</a>を受講しはじめた。</p>
+<p>正月からちょっとずつ機械学習の勉強をしているけど、それは40代以降もプログラマーとして働き続けたいと思っているからだ。あと10年くらいは今の知識や経験で活躍できるかもしれないけど、ずっとプログラマーでいるには新しい技術領域に時間をかけたいと思った。まずはCoursera等で勉強し、少しずつ仕事として機械学習に取り組んでいけるようにしたい。</p>
+
+      </div>
+    </content>
+  </entry>
   
   <entry>
     <title>awscliのwaitコマンドが便利だった</title>
