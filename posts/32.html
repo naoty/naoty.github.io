@@ -1,0 +1,41 @@
+<!DOCTYPE html><html lang="ja" dir="ltr"><head><script async src="https://www.googletagmanager.com/gtag/js?id=UA-110417654-1"></script><script>window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-110417654-1');</script><meta charset="utf-8"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Circle CIのSlackへの通知を分かりやすくする</title><meta name="description" content="Circle CIのSlackへの通知にjob名を入れるためにスクリプトを書いた話"><meta name="author" content="Naoto Kaneko"><meta name="theme-color" content="white"><meta property="og:title" content="Circle CIのSlackへの通知を分かりやすくする"><meta property="og:type" content="article"><meta property="og:image" content="https://naoty.github.io/icons/256x256.png"><meta property="og:url" content="https://naoty.github.io/posts/32.html"><meta property="og:description" content="Circle CIのSlackへの通知にjob名を入れるためにスクリプトを書いた話"><meta property="twitter:card" content="summary"><meta property="twitter:site" content="@naoty_k"><meta property="twitter:title" content="Circle CIのSlackへの通知を分かりやすくする"><meta property="twitter:description" content="Circle CIのSlackへの通知にjob名を入れるためにスクリプトを書いた話"><meta property="twitter:image" content="https://naoty.github.io/icons/256x256.png"><link rel="icon" type="image/png" href="/icons/favicon.png"><link rel="apple-touch-icon" href="/icons/apple-touch-icon.png"><link rel="manifest" href="/manifest.json"><link rel="stylesheet" href="/stylesheets/application.css"><link rel="alternate" type="application/atom+xml" href="/posts/index.atom"></head><body class="l-container"><div class="p-post-container" itemscope itemtype="http://schema.org/BlogPosting"><main class="p-post-container__body"><article><header class="p-post__header"><h1 class="p-post__title" itemprop="mainEntityOfPage headline">Circle CIのSlackへの通知を分かりやすくする</h1><p class="p-post__metadata"><time datetime="2018-06-08T16:23:00.000+09:00" itemprop="datePublished dateModified">2018-06-08 16:23:00</time></p></header><section class="p-post__content" itemprop="articleBody"><style id="MathJax_SVG_styles">.MathJax_SVG_Display {text-align: center; margin: 1em 0em; position: relative; display: block!important; text-indent: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; width: 100%}
+.MathJax_SVG .MJX-monospace {font-family: monospace}
+.MathJax_SVG .MJX-sans-serif {font-family: sans-serif}
+.MathJax_SVG {display: inline; font-style: normal; font-weight: normal; line-height: normal; font-size: 100%; font-size-adjust: none; text-indent: 0; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0; min-height: 0; border: 0; padding: 0; margin: 0}
+.MathJax_SVG * {transition: none; -webkit-transition: none; -moz-transition: none; -ms-transition: none; -o-transition: none}
+.mjx-svg-href {fill: blue; stroke: blue}
+.MathJax_SVG_LineBox {display: table!important}
+.MathJax_SVG_LineBox span {display: table-cell!important; width: 10000em!important; min-width: 0; max-width: none; padding: 0; border: 0; margin: 0}</style><svg style="display: none;"><defs id="MathJax_SVG_glyphs"></defs></svg><p>Circle CI 2.0で導入されたworkflowを使うと、Slackへの通知にどのjobが完了したのかが含まれていなくて困ることがあった。特に失敗したときにどのjobが失敗したのかSlackでは分からないのが不便だった。</p><p>そこで、Slackへの通知を分かりやすくするための設定をいくつかしてみたところ、劇的によくなったので紹介したい。</p><h1 id="-">通知スクリプトを自作する</h1><pre><code class="lang-bash">#!/bin/bash -e
+
+payload=$(cat &lt;&lt; EOS
+{
+  "attachments": [
+    {
+      "title": "Success",
+      "title_link": "${CIRCLE_BUILD_URL}",
+      "text": "\`workflow/${CIRCLE_STAGE}\` in ${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME} (${CIRCLE_BRANCH})",
+      "mrkdwn_in": ["text"],
+      "color": "good"
+    }
+  ]
+}
+EOS
+)
+
+curl \
+  -X POST \
+  -H 'Content-Type: application/json' \
+  --data "${payload}" \
+  ${SLACK_WEBHOOK_URL}
+</code></pre><ul><li>Circle CIの連携時に生成されるWebhookを使って通知を送るスクリプトを書いた。</li><li><code>attachments</code>フィールドを使ってリッチなメッセージを作る。</li><li>環境変数<code>CIRCLE_STAGE</code>には、workflow内で実行中のjob名が入っているため、これを使ってどのjobが成功したのか失敗したのかを通知できる。</li></ul><h1 id="-">通知スクリプトを設定する</h1><pre><code class="lang-yaml">jobs:
+  test:
+    steps:
+      # ...
+      - run: ./.circleci/notify-success
+      - run:
+          command: ./.circleci/notify-failure
+          when: on_fail
+</code></pre><ul><li>各jobの最後のstepに成功時の通知を送るスクリプトを設定する。</li><li><code>when: on_fail</code>を設定すると、先に実行されたstepが失敗したときに呼ばれるstepを設定できる。それを利用して、失敗時の通知を送るスクリプトを設定する。</li></ul></section><footer class="p-post__footer"><p class="u-text-center"><a href="/">トップ</a> | <a href="/posts/">一覧</a> | <a href="/posts/index.atom">Feed</a></p></footer></article></main><footer class="p-post-container__footer"><p class="u-text-center">© 2017 <span itemprop="author">Naoto Kaneko</span></p></footer></div></body></html>
