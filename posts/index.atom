@@ -2,11 +2,26 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja">
   <id>https://naoty.github.io/posts/index.atom</id>
   <title>Naoto Kaneko's posts</title>
-  <updated>2018-07-08T14:24:00.000+09:00</updated>
+  <updated>2018-07-21T16:35:00.000+09:00</updated>
   <link rel="self" href="https://naoty.github.io/posts/index.atom"/>
   <author>
     <name>Naoto Kaneko</name>
   </author>
+  
+  <entry>
+    <title>「Pythonデータサイエンスハンドブック」を読んでいる</title>
+    <link rel="alternate" href="https://naoty.github.io/posts/35.html"/>
+    <id>https://naoty.github.io/posts/35.html</id>
+    <updated>2018-07-21T16:35:00.000+09:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <p><a href="https://www.oreilly.co.jp/books/9784873118413/">https://www.oreilly.co.jp/books/9784873118413/</a></p>
+<p>Courseraで機械学習について学んだものの、実務やKaggleで実践するにはPythonを使って機械学習のコードを書けるようになる必要がある。Pythonで機械学習のコードを書くとき、numpy、matplotlib、pandas、scikit-learnといったパッケージを使うことになる。</p>
+<p>この本はこうしたよく使うパッケージの使い方をかなり詳しく説明している。他の機械学習に関する本では、こうしたパッケージの使い方は分かっている前提で機械学習のアルゴリズムやその実装方法に字数が割かれるため、この本を前もって読んでおくと効率がいい気がする。</p>
+
+      </div>
+    </content>
+  </entry>
   
   <entry>
     <title>CourseraのMachine Learningを修了した</title>
