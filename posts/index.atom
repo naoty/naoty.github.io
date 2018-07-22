@@ -2,11 +2,76 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja">
   <id>https://naoty.github.io/posts/index.atom</id>
   <title>Naoto Kaneko's posts</title>
-  <updated>2018-07-21T16:35:00.000+09:00</updated>
+  <updated>2018-07-22T15:02:00.000+09:00</updated>
   <link rel="self" href="https://naoty.github.io/posts/index.atom"/>
   <author>
     <name>Naoto Kaneko</name>
   </author>
+  
+  <entry>
+    <title>決定境界のプロット</title>
+    <link rel="alternate" href="https://naoty.github.io/posts/36.html"/>
+    <id>https://naoty.github.io/posts/36.html</id>
+    <updated>2018-07-22T15:02:00.000+09:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <p>ロジスティック回帰など分類を行うアルゴリズムがちゃんとトレーニングデータを分類できているか確認するため、決定境界をプロットする方法を学んだ。そのメモをブログに残す。</p>
+<h2 id="-">まとめ</h2>
+<ul>
+<li><code>np.meshgrid()</code>で格子点を取得する。しかも、<code>np.arange()</code>などを使ってできるだけ細かく格子点を取得する。</li>
+<li>格子点を分類器に適用するため、トレーニングデータの形状に変換する。</li>
+<li>格子点に対して分類を予測する。</li>
+<li>格子点とその分類の予測を<code>plt.contourf()</code>を使って等高線としてプロットする。</li>
+</ul>
+<h2 id="-">格子点の取得</h2>
+<pre><code>x1 = np.arange(0, 5, 0.5)
+x2 = np.arange(0, 10, 0.5)
+X1, X2 = np.meshgrid(x1, x2)
+
+plt.plot(X1, X2, &#39;ok&#39;)
+plt.xlimit(-1, 11)
+plt.ylimit(-1, 11)
+plt.show()
+</code></pre><p><img src="/images/posts/36/meshgrid.png" alt="meshgrid"></p>
+<p>上のように<code>np.meshgrid()</code>を使うと、2つの配列<code>x1</code>と<code>x2</code>からなる平面上にある格子点を取得できる。</p>
+<p>この格子点の間隔を小さくすると、<code>x1</code>と<code>x2</code>からなる平面上の「すべての点」を擬似的に再現できる。</p>
+<pre><code>x1 = np.arange(0, 5, 0.01)
+x2 = np.arange(0, 10, 0.01)
+
+# 以下同じ
+</code></pre><p><img src="/images/posts/36/dense_meshgrid.png" alt="dense meshgrid"></p>
+<h2 id="-">格子点の変換</h2>
+<p>ある平面上の「すべての点」を分類器に適用すると、平面上に分類した結果をマッピングできるようになる。</p>
+<p>そのために格子点をトレーニングデータの形状に変換する。つまり、$(x_1, x_2)$のようにする。</p>
+<pre><code># flatにする
+X1_flatten = X1.ravel()
+X2_flatten = X2.ravel()
+
+# 結合して行列にする
+X = np.array([X1_flatten, X2_flatten])
+
+# 行方向がトレーニングデータ、列方向がフィーチャーになるように転置する
+X = X.T
+</code></pre><h2 id="-">格子点を分類器に適用する</h2>
+<pre><code>Z = classifier.predict(X)
+</code></pre><p>上で分類器に適用できるように変換できたので、あとは予測する。</p>
+<h2 id="-">等高線図でプロットする</h2>
+<pre><code># プロットできるように形状を揃える
+Z = Z.reshape(X1.shape)
+
+plt.contourf(X1, X2, Z, cmap=&#39;RdBu&#39;, alpha=0.5)
+plt.xlim(-1, 11)
+plt.ylim(-1, 11)
+plt.xlabel(&#39;x1&#39;)
+plt.ylabel(&#39;x2&#39;)
+plt.show()
+</code></pre><p><img src="/images/posts/36/decision_regions.png" alt="decision regions"></p>
+<p><em>（上図は適当な関数を適用しただけです）</em></p>
+<p><code>plt.contourf()</code>は等高線図を引きつつ、領域を塗りつぶしてくれるので決定境界をプロットするのに便利。</p>
+
+      </div>
+    </content>
+  </entry>
   
   <entry>
     <title>「Pythonデータサイエンスハンドブック」を読んでいる</title>
