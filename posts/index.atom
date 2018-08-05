@@ -2,11 +2,52 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja">
   <id>https://naoty.github.io/posts/index.atom</id>
   <title>Naoto Kaneko's posts</title>
-  <updated>2018-07-29T17:55:00.000+09:00</updated>
+  <updated>2018-08-05T18:55:00.000+09:00</updated>
   <link rel="self" href="https://naoty.github.io/posts/index.atom"/>
   <author>
     <name>Naoto Kaneko</name>
   </author>
+  
+  <entry>
+    <title>multi-stage buildでのfreshの運用</title>
+    <link rel="alternate" href="https://naoty.github.io/posts/38.html"/>
+    <id>https://naoty.github.io/posts/38.html</id>
+    <updated>2018-08-05T18:55:00.000+09:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <p>Goで書いているWebアプリケーションをDockerイメージにするとき、multi-stage buildを使ってビルド用のイメージと実行用のイメージを分けると思う。実行用のイメージをalpine linuxベースにするとイメージのサイズが異常に小さくなる。</p>
+<pre><code>FROM golang as builder
+ENV CGO_ENABLED 0
+WORKDIR /go/src/github.com/naoty/hello
+
+RUN curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh \
+  &amp;&amp; go get github.com/pilu/fresh
+
+# dep
+COPY Gopkg.toml Gopkg.lock /go/src/github.com/naoty/hello/
+RUN dep ensure -v --vendor-only=true
+
+COPY . /go/src/github.com/naoty/hello/
+RUN make install
+
+FROM alpine
+RUN apk --no-cache add ca-certificates 
+WORKDIR /root/
+COPY --from=builder /go/bin/hello /root/
+CMD [&quot;./hello&quot;]
+</code></pre><p>一方で、Goの開発では<a href="https://github.com/pilu/fresh">pilu/fresh</a>を使ってファイルの更新時に自動的にビルドと実行をし直したい。だけど、multi-stage buildを使っていると、実行用のイメージにはGoのビルド環境がないため、少し工夫が必要になる。</p>
+<p>docker-composeを使うとき、<code>target</code>オプションを使うとビルド用のコンテナまででビルドを中断できる。ただし、3.4からの機能なので<code>version</code>を3.4以上にする必要がある。</p>
+<pre><code>version: &quot;3.4&quot;
+services:
+  app:
+    build:
+      context: .
+      target: builder
+    command: [&quot;fresh&quot;]
+</code></pre>
+      </div>
+    </content>
+  </entry>
   
   <entry>
     <title>HTMLテンプレートをpackrでバイナリに埋め込む</title>
