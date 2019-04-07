@@ -4839,8 +4839,8 @@ class DateTime {
   /**
    * "Set" the DateTime's zone to specified zone. Returns a newly-constructed DateTime.
    *
-   * By default, the setter keeps the underlying time the same (as in, the same UTC timestamp), but the new instance will report different local times and consider DSTs when making computations, as with {@link plus}. You may wish to use {@link toLocal} and {@link toUTC} which provide simple convenience wrappers for commonly used zones.
-   * @param {string|Zone} [zone='local'] - a zone identifier. As a string, that can be any IANA zone supported by the host environment, or a fixed-offset name of the form 'utc+3', or the strings 'local' or 'utc'. You may also supply an instance of a {@link Zone} class.
+   * By default, the setter keeps the underlying time the same (as in, the same timestamp), but the new instance will report different local times and consider DSTs when making computations, as with {@link plus}. You may wish to use {@link toLocal} and {@link toUTC} which provide simple convenience wrappers for commonly used zones.
+   * @param {string|Zone} [zone='local'] - a zone identifier. As a string, that can be any IANA zone supported by the host environment, or a fixed-offset name of the form 'UTC+3', or the strings 'local' or 'utc'. You may also supply an instance of a {@link Zone} class.
    * @param {Object} opts - options
    * @param {boolean} [opts.keepLocalTime=false] - If true, adjust the underlying time so that the local time stays the same, but in the target zone. You should rarely need this.
    * @return {DateTime}
@@ -4928,8 +4928,8 @@ class DateTime {
    * @example DateTime.local().plus({ minutes: 15 }) //~> in 15 minutes
    * @example DateTime.local().plus({ days: 1 }) //~> this time tomorrow
    * @example DateTime.local().plus({ days: -1 }) //~> this time yesterday
-   * @example DateTime.local().plus({ hours: 3, minutes: 13 }) //~> in 1 hr, 13 min
-   * @example DateTime.local().plus(Duration.fromObject({ hours: 3, minutes: 13 })) //~> in 1 hr, 13 min
+   * @example DateTime.local().plus({ hours: 3, minutes: 13 }) //~> in 3 hr, 13 min
+   * @example DateTime.local().plus(Duration.fromObject({ hours: 3, minutes: 13 })) //~> in 3 hr, 13 min
    * @return {DateTime}
    */
   plus(duration) {
@@ -6741,11 +6741,10 @@ function highOrderDiffs(cursor, later, units) {
       lowestOrder = unit;
 
       let delta = differ(cursor, later);
-
       highWater = cursor.plus({ [unit]: delta });
 
       if (highWater > later) {
-        cursor = highWater.minus({ [unit]: 1 });
+        cursor = cursor.plus({ [unit]: delta - 1 });
         delta -= 1;
       } else {
         cursor = highWater;
@@ -8301,7 +8300,7 @@ function extractISOOffset(match, cursor) {
 }
 
 function extractIANAZone(match, cursor) {
-  const zone = match[cursor] ? new _zones_IANAZone_js__WEBPACK_IMPORTED_MODULE_3__["default"](match[cursor]) : null;
+  const zone = match[cursor] ? _zones_IANAZone_js__WEBPACK_IMPORTED_MODULE_3__["default"].create(match[cursor]) : null;
   return [{}, zone, cursor + 1];
 }
 
@@ -8660,7 +8659,7 @@ function unitForToken(token, loc) {
         // we don't support ZZZZ (PST) or ZZZZZ (Pacific Standard Time) in parsing
         // because we don't have any way to figure out what they are
         case "z":
-          return simple(/[a-z_+-]{1,256}(\/[a-z_+-]{1,256}(\/[a-z_+-]{1,256})?)?/i);
+          return simple(/[a-z_+-/]{1,256}?/i);
         default:
           return literal(t);
       }
@@ -8739,7 +8738,7 @@ function dateTimeFromMatches(matches) {
   if (!Object(_util_js__WEBPACK_IMPORTED_MODULE_0__["isUndefined"])(matches.Z)) {
     zone = new _zones_fixedOffsetZone_js__WEBPACK_IMPORTED_MODULE_2__["default"](matches.Z);
   } else if (!Object(_util_js__WEBPACK_IMPORTED_MODULE_0__["isUndefined"])(matches.z)) {
-    zone = new _zones_IANAZone_js__WEBPACK_IMPORTED_MODULE_3__["default"](matches.z);
+    zone = _zones_IANAZone_js__WEBPACK_IMPORTED_MODULE_3__["default"].create(matches.z);
   } else {
     zone = null;
   }
@@ -9127,7 +9126,7 @@ function normalizeZone(input, defaultZone) {
     else if ((offset = _zones_IANAZone_js__WEBPACK_IMPORTED_MODULE_1__["default"].parseGMTOffset(input)) != null) {
       // handle Etc/GMT-4, which V8 chokes on
       return _zones_fixedOffsetZone_js__WEBPACK_IMPORTED_MODULE_2__["default"].instance(offset);
-    } else if (_zones_IANAZone_js__WEBPACK_IMPORTED_MODULE_1__["default"].isValidSpecifier(lowered)) return new _zones_IANAZone_js__WEBPACK_IMPORTED_MODULE_1__["default"](input);
+    } else if (_zones_IANAZone_js__WEBPACK_IMPORTED_MODULE_1__["default"].isValidSpecifier(lowered)) return _zones_IANAZone_js__WEBPACK_IMPORTED_MODULE_1__["default"].create(input);
     else return _zones_fixedOffsetZone_js__WEBPACK_IMPORTED_MODULE_2__["default"].parseSpecifier(lowered) || new _zones_invalidZone_js__WEBPACK_IMPORTED_MODULE_3__["default"](input);
   } else if (Object(_util_js__WEBPACK_IMPORTED_MODULE_4__["isNumber"])(input)) {
     return _zones_fixedOffsetZone_js__WEBPACK_IMPORTED_MODULE_2__["default"].instance(input);
@@ -9990,8 +9989,10 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Settings; });
 /* harmony import */ var _zones_localZone_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./zones/localZone.js */ "./node_modules/luxon/src/zones/localZone.js");
-/* harmony import */ var _impl_locale_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./impl/locale.js */ "./node_modules/luxon/src/impl/locale.js");
-/* harmony import */ var _impl_zoneUtil_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./impl/zoneUtil.js */ "./node_modules/luxon/src/impl/zoneUtil.js");
+/* harmony import */ var _zones_IANAZone_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./zones/IANAZone.js */ "./node_modules/luxon/src/zones/IANAZone.js");
+/* harmony import */ var _impl_locale_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./impl/locale.js */ "./node_modules/luxon/src/impl/locale.js");
+/* harmony import */ var _impl_zoneUtil_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./impl/zoneUtil.js */ "./node_modules/luxon/src/impl/zoneUtil.js");
+
 
 
 
@@ -10032,7 +10033,7 @@ class Settings {
    * @type {string}
    */
   static get defaultZoneName() {
-    return (defaultZone || _zones_localZone_js__WEBPACK_IMPORTED_MODULE_0__["default"].instance).name;
+    return Settings.defaultZone.name;
   }
 
   /**
@@ -10043,7 +10044,7 @@ class Settings {
     if (!z) {
       defaultZone = null;
     } else {
-      defaultZone = Object(_impl_zoneUtil_js__WEBPACK_IMPORTED_MODULE_2__["normalizeZone"])(z);
+      defaultZone = Object(_impl_zoneUtil_js__WEBPACK_IMPORTED_MODULE_3__["normalizeZone"])(z);
     }
   }
 
@@ -10124,7 +10125,8 @@ class Settings {
    * @return {void}
    */
   static resetCaches() {
-    _impl_locale_js__WEBPACK_IMPORTED_MODULE_1__["default"].resetCache();
+    _impl_locale_js__WEBPACK_IMPORTED_MODULE_2__["default"].resetCache();
+    _zones_IANAZone_js__WEBPACK_IMPORTED_MODULE_1__["default"].resetCache();
   }
 }
 
@@ -10239,7 +10241,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const matchingRegex = RegExp(`^${_impl_util_js__WEBPACK_IMPORTED_MODULE_0__["ianaRegex"].source}$`);
 
-const dtfCache = {};
+let dtfCache = {};
 function makeDTF(zone) {
   if (!dtfCache[zone]) {
     dtfCache[zone] = new Intl.DateTimeFormat("en-US", {
@@ -10286,11 +10288,30 @@ function partsOffset(dtf, date) {
   return filled;
 }
 
+let ianaZoneCache = {};
 /**
  * A zone identified by an IANA identifier, like America/New_York
- * @implments {Zone}
+ * @implements {Zone}
  */
 class IANAZone extends _zone_js__WEBPACK_IMPORTED_MODULE_1__["default"] {
+  /**
+   * @param {string} name - Zone name
+   * @return {IANAZone}
+   */
+  static create(name) {
+    if (!ianaZoneCache[name]) {
+      ianaZoneCache[name] = new IANAZone(name);
+    }
+    return ianaZoneCache[name];
+  }
+  /**
+   * Reset local caches. Should only be necessary in testing scenarios.
+   * @return {void}
+   */
+  static resetCache() {
+    ianaZoneCache = {};
+    dtfCache = {};
+  }
   /**
    * Returns whether the provided string is a valid specifier. This only checks the string's format, not that the specifier identifies a known zone; see isValidZone for that.
    * @param {string} s - The string to check validity on
@@ -10309,7 +10330,7 @@ class IANAZone extends _zone_js__WEBPACK_IMPORTED_MODULE_1__["default"] {
    * @example IANAZone.isValidZone("America/New_York") //=> true
    * @example IANAZone.isValidZone("Fantasia/Castle") //=> false
    * @example IANAZone.isValidZone("Sport~~blorp") //=> false
-   * @return {true}
+   * @return {boolean}
    */
   static isValidZone(zone) {
     try {
@@ -10414,7 +10435,7 @@ function hoursMinutesOffset(z) {
 
 /**
  * A zone with a fixed offset (i.e. no DST)
- * @implments {Zone}
+ * @implements {Zone}
  */
 class FixedOffsetZone extends _zone_js__WEBPACK_IMPORTED_MODULE_1__["default"] {
   /**
@@ -10438,7 +10459,7 @@ class FixedOffsetZone extends _zone_js__WEBPACK_IMPORTED_MODULE_1__["default"] {
   }
 
   /**
-   * Get an instance of FixedOffsetZone with from a UTC offset string, like "UTC+6"
+   * Get an instance of FixedOffsetZone from a UTC offset string, like "UTC+6"
    * @param {string} s - The offset string to parse
    * @example FixedOffsetZone.parseSpecifier("UTC+6")
    * @example FixedOffsetZone.parseSpecifier("UTC+06")
@@ -10515,7 +10536,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /**
  * A zone that failed to parse. You should never need to instantiate this.
- * @implments {Zone}
+ * @implements {Zone}
  */
 class InvalidZone extends _zone_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
   constructor(zoneName) {
@@ -10582,7 +10603,7 @@ let singleton = null;
 
 /**
  * Represents the local zone for this Javascript environment.
- * @implments {Zone}
+ * @implements {Zone}
  */
 class LocalZone extends _zone_js__WEBPACK_IMPORTED_MODULE_1__["default"] {
   /**
