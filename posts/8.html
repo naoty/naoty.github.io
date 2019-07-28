@@ -2,12 +2,12 @@
 <p>自分が抱えている問題を自分のコードで解決できるというのは、豊かな体験だとおもっている。来年も続けていけるように今年を振り返る。</p>
 <h1>使っているもの</h1>
 <h2><a href="https://github.com/naoty/table">table</a></h2>
-<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash">$ <span class="token builtin class-name">echo</span> <span class="token string">"day<span class="token entity" title="\t">\t</span>DAU<span class="token entity" title="\n">\n</span>2017-01-01<span class="token entity" title="\t">\t</span>10000<span class="token entity" title="\n">\n</span>2017-01-02<span class="token entity" title="\t">\t</span>8000"</span> <span class="token operator">|</span> table -H
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash">$ <span class="token keyword">echo</span> <span class="token string">"day\tDAU\n2017-01-01\t10000\n2017-01-02\t8000"</span> <span class="token operator">|</span> table -H
 +------------+-------+
 <span class="token operator">|</span> day        <span class="token operator">|</span> DAU   <span class="token operator">|</span>
 +------------+-------+
-<span class="token operator">|</span> <span class="token number">2017</span>-01-01 <span class="token operator">|</span> <span class="token number">10000</span> <span class="token operator">|</span>
-<span class="token operator">|</span> <span class="token number">2017</span>-01-02 <span class="token operator">|</span> <span class="token number">8000</span>  <span class="token operator">|</span>
+<span class="token operator">|</span> 2017-01-01 <span class="token operator">|</span> 10000 <span class="token operator">|</span>
+<span class="token operator">|</span> 2017-01-02 <span class="token operator">|</span> 8000  <span class="token operator">|</span>
 +------------+-------+</code></pre></div>
 <p><code class="language-text">table</code>はタブ区切りの文字列をASCIIのテーブル形式に変換する。Google Spreadsheetなど表形式のテキストをSlackにコピペしたくて作った。そんなに使う頻度は多くないけど、使うときはとても便利でたまに使う。</p>
 <h2><a href="https://github.com/naoty/homebrew-misc">homebrew-misc</a></h2>
