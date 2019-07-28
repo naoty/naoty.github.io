@@ -4,9 +4,9 @@
 <div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash">aws ecs <span class="token function">wait</span> tasks-stopped --tasks <span class="token variable">${task_arn1}</span> <span class="token variable">${task_arn2}</span></code></pre></div>
 <p>これは<code class="language-text">aws ecs describe-tasks</code>を定期的に実行してレスポンスからステータスを取得し、それが完了するまで待つ。<code class="language-text">--tasks</code>オプションはECSタスクのARNを複数指定できるので、複数のタスクがすべて完了するのを待つことができる。</p>
 <p>ECSタスクのARNは<code class="language-text">aws ecs run-task</code>のレスポンスから取得できる。実際にはこんな感じで書くと思う。</p>
-<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token assign-left variable">task_arn1</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span>aws ecs run-task <span class="token punctuation">\</span>
-  --task-definition my-task-definition <span class="token punctuation">\</span>
-  --query <span class="token string">"tasks[0].taskArn"</span> <span class="token punctuation">\</span>
+<div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash">task_arn1<span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span>aws ecs run-task \
+  --task-definition my-task-definition \
+  --query <span class="token string">"tasks[0].taskArn"</span> \
   --output text<span class="token variable">)</span></span>
 
 aws ecs <span class="token function">wait</span> tasks-stopped --tasks <span class="token variable">${task_arn1}</span></code></pre></div>
