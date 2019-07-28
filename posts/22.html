@@ -20,22 +20,22 @@
 +----+-----------+
 <span class="token operator">|</span> <span class="token function">id</span> <span class="token operator">|</span> name      <span class="token operator">|</span>
 +----+-----------+
-<span class="token operator">|</span> 1  <span class="token operator">|</span> bulbasaur <span class="token operator">|</span>
-<span class="token operator">|</span> 2  <span class="token operator">|</span> ivysaur   <span class="token operator">|</span>
-<span class="token operator">|</span> 3  <span class="token operator">|</span> venusaur  <span class="token operator">|</span>
+<span class="token operator">|</span> <span class="token number">1</span>  <span class="token operator">|</span> bulbasaur <span class="token operator">|</span>
+<span class="token operator">|</span> <span class="token number">2</span>  <span class="token operator">|</span> ivysaur   <span class="token operator">|</span>
+<span class="token operator">|</span> <span class="token number">3</span>  <span class="token operator">|</span> venusaur  <span class="token operator">|</span>
 +----+-----------+</code></pre></div>
 <p><code class="language-text">table</code>コマンドは出力フォーマットとしてMarkdown形式のテーブルも選べるので、以下のように出力できる。</p>
 <div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">$ <span class="token function">cat</span> pokemons.json <span class="token operator">|</span> table -f json:markdown
 <span class="token operator">|</span> <span class="token function">id</span> <span class="token operator">|</span> name      <span class="token operator">|</span>
 <span class="token operator">|</span> -- <span class="token operator">|</span> --------- <span class="token operator">|</span>
-<span class="token operator">|</span> 1  <span class="token operator">|</span> bulbasaur <span class="token operator">|</span>
-<span class="token operator">|</span> 2  <span class="token operator">|</span> ivysaur   <span class="token operator">|</span>
-<span class="token operator">|</span> 3  <span class="token operator">|</span> venusaur  <span class="token operator">|</span></code></pre></div>
+<span class="token operator">|</span> <span class="token number">1</span>  <span class="token operator">|</span> bulbasaur <span class="token operator">|</span>
+<span class="token operator">|</span> <span class="token number">2</span>  <span class="token operator">|</span> ivysaur   <span class="token operator">|</span>
+<span class="token operator">|</span> <span class="token number">3</span>  <span class="token operator">|</span> venusaur  <span class="token operator">|</span></code></pre></div>
 <h1>モチベーション</h1>
 <p>最近、AWSの作業をすることが増えてAWS CLIから返ってくるJSONを扱うことが増えた。返ってきたJSONを<code class="language-text">jq</code>コマンドで整形して表示するのだけど、件数が増えるとかなり見にくかった。そこで、このような機能を追加してASCIIテーブルとして見やすくしたかったので追加してみた。</p>
 <p>例えば、ECSのあるタスク定義に含まれるイメージを知りたいとき、こんな感じでやることになりそう。</p>
-<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">$ aws ecs describe-task-definition --task-definition hello_world:8 <span class="token operator">|</span> \
-  jq <span class="token string">".taskDefinition.containerDefinitions | map({name: .name, image: .image})"</span> <span class="token operator">|</span> \
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">$ aws ecs describe-task-definition --task-definition hello_world:8 <span class="token operator">|</span> <span class="token punctuation">\</span>
+  jq <span class="token string">".taskDefinition.containerDefinitions | map({name: .name, image: .image})"</span> <span class="token operator">|</span> <span class="token punctuation">\</span>
   table -f json:ascii
 +-----------+-----------+
 <span class="token operator">|</span> name      <span class="token operator">|</span> image     <span class="token operator">|</span>
