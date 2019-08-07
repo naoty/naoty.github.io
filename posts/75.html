@@ -3,7 +3,7 @@
 <div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash">$ <span class="token function">mkdir</span> hello-mruby
 $ <span class="token builtin class-name">cd</span> hello-mruby
 $ <span class="token function">vi</span> Dockerfile</code></pre></div>
-<div class="gatsby-highlight" data-language="diff"><pre class="language-diff"><code class="language-diff"><span class="token inserted-sign inserted">+FROM ruby:2.6
+<div class="gatsby-highlight" data-language="diff"><pre class="language-diff"><code class="language-diff"><span class="token inserted-sign inserted">+FROM ruby:1.9
 +RUN apt update &amp;&amp; \
 +  apt install -y bison --no-install-recommends &amp;&amp; \
 +  git clone https://github.com/mruby/mruby &amp;&amp; \
